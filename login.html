@@ -1,0 +1,51 @@
+<html>
+<head>
+  <link rel="stylesheet" href="css/foundation.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css"/>
+  <body>
+    <div class="row align-center height-100">
+      <div id="input" class="box large-4 columns align-self-middle">
+        <form method="POST">
+          <div class="large-10 large-offset-1 medium-10 columns">
+                <label></label>
+                <input id="authKey" name="authkey" type="text" class="text-align-center" placeholder="Authorisation Key">
+          </div>
+
+          <div class="large-10 large-offset-1 medium-10 columns">
+
+                <input type="submit" onclick="auth();" value="ENTER" class="button">
+
+                <script>
+
+                function auth(){
+                    var req = new XMLHttpRequest();
+                    var url = "auth.php";
+
+                    var fn = document.getElementById("authKey").value;
+                    var vars = "firstname="+fn;
+                    req.open("POST", url, true);
+                    req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    req.onreadystatechange = function() {
+                	    if(req.readyState == 4 && req.status == 200) {
+                		    var return_data = req.responseText;
+                        console.log(return_data);
+                			  document.getElementById("input").innerHTML = return_data;
+                        if(return_data == "Authorised!"){
+                          // succes callback
+                          document.getElementById("input").style.opacity = 0;
+                          window.location.replace("3d.php");
+                        }
+                	    }
+                    }
+                    // exec req
+                    req.send(vars);
+                    document.getElementById("authKey").innerHTML = "processing...";
+                }
+                </script>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</head>
+</html>
