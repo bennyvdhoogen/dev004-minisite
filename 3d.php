@@ -1,10 +1,6 @@
 <?php
 session_start();
 //  header('Location: gui.html');
-if($_SESSION['allowed'] != true){
-  header('Location: login.html', true);
-  exit();
-}
  ?>
 <html>
 <head>
@@ -84,7 +80,7 @@ break;
 				// Add the COLLADA
 				scene.add( dae );
 				particleLight = new THREE.Mesh( new THREE.SphereGeometry( 4, 8, 8 ), new THREE.MeshBasicMaterial( { color: 0xffff00 } ) );
-				scene.add( particleLight );
+			//	scene.add( particleLight );
 				// Lights
 		//		scene.add( new THREE.AmbientLight( 0xcccccc ) );
 				var directionalLight = new THREE.DirectionalLight(/*Math.random() * 0xffffff*/0xeeeaaa );
