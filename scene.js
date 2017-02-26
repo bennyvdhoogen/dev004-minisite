@@ -4,6 +4,7 @@ var camera, scene, renderer, objects;
 var particleLight;
 var dae;
 var loader = new THREE.ColladaLoader();
+var textureLoader;
 
 var raycaster = new THREE.Raycaster();
 var mouse = new THREE.Vector2();
@@ -77,7 +78,7 @@ loader.load( 'assets/demo.dae', function ( collada ) {
       animation.play();
     }
   } );
-  dae.scale.x = dae.scale.y = dae.scale.z = 0.2;
+  dae.scale.x = dae.scale.y = dae.scale.z = 0.05;
   dae.updateMatrix();
   init();
   animate();
@@ -102,6 +103,30 @@ function init() {
   }
   var line = new THREE.LineSegments( geometry, material );
   scene.add( line );
+
+  // Textures
+var textureLoader = new THREE.TextureLoader();
+
+var sphereTex = textureLoader.load( 'assets/dev004_sphere_bg.jpg' );
+var sphereMat = new THREE.MeshPhongMaterial( { color: 0xffffff, map: sphereTex } );
+
+  perlinMaterial = new THREE.ShaderMaterial( {
+    uniforms: {
+      tShine: { type: "t", value: THREE.ImageUtils.loadTexture( 'assets/dev004_sphere_bg.jpg' ) },
+      time: { type: "f", value: 0 },
+      weight: { type: "f", value: 0 }
+    },
+    vertexShader: document.getElementById( 'vertexShader' ).textContent,
+    fragmentShader: document.getElementById( 'fragmentShader' ).textContent
+
+  } );
+
+  var geometry = new THREE.SphereGeometry(100, 50, 50, 0, Math.PI * 2, 0, Math.PI * 2);
+  var material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
+  var sphere = new THREE.Mesh(geometry, perlinMaterial);
+
+  sphere.position = new THREE.Vector3(0, 0, -299);
+  scene.add(sphere);
   // Add the COLLADA
   scene.add( dae );
   particleLight = new THREE.Mesh( new THREE.SphereGeometry( 4, 8, 8 ), new THREE.MeshBasicMaterial( { color: 0xffff00 } ) );
@@ -155,8 +180,8 @@ function onMouseMove( event ) {
 
 function onDocumentMouseDown( event ) {
 
-    //console.log(event);
-    //console.log(raycaster);
+    console.log(event);
+    console.log(raycaster);
 
 
     event.preventDefault();
@@ -166,7 +191,7 @@ function onDocumentMouseDown( event ) {
 
     raycaster.setFromCamera( mouse, camera );
 
-    var intersects = raycaster.intersectObjects( scene.children[1].children, true);
+    var intersects = raycaster.intersectObjects( scene.children[2].children, true);
 
     if ( intersects.length > 0 ) {
       var mesh  = intersects[0].object.parent;
@@ -186,7 +211,12 @@ function animate() {
   stats.update();
 }
 var clock = new THREE.Clock();
+var start = Date.now();
+
 function render() {
+  perlinMaterial.uniforms[ 'time' ].value = .00025 * ( Date.now() - start );
+	perlinMaterial.uniforms[ 'weight' ].value = 10.0 * ( .5 + .5 * Math.sin( .00025 * ( Date.now() - start ) ) );
+//	material.uniforms[ 'weight' ].value = 10.0;
   var timer = Date.now() * 0.0005;
   radious = 1;
   // camera.position.x = radious * Math.sin( theta * Math.PI / 360 )
@@ -207,7 +237,7 @@ function render() {
 	var intersects = raycaster.intersectObjects( scene.children );
 
 	for ( var i = 0; i < intersects.length; i++ ) {
-		intersects[ i ].object.material.color.set( 0xff0000 );
+//		intersects[ i ].object.material.color.set( 0xff0000 );
 
 	}
   particleLight.position.x = Math.sin( timer * 4 ) * 3009;
