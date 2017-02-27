@@ -7,21 +7,39 @@ var loader = new THREE.ColladaLoader();
 var textureLoader;
 var raycaster = new THREE.Raycaster();
 var mouse = new THREE.Vector2();
+var vertexShader;
+var fragmentShader;
+
 
 loader.options.convertUpAxis = true;
 loader.load( 'assets/demo.dae', function ( collada ) {
-  dae = collada.scene;
-  dae.traverse( function ( child ) {
-    if ( child instanceof THREE.SkinnedMesh ) {
-      var animation = new THREE.Animation( child, child.geometry.animation );
-      animation.play();
-    }
-  } );
-  dae.scale.x = dae.scale.y = dae.scale.z = 0.05;
-  dae.updateMatrix();
-  init();
-  animate();
+  loadTextFile('shaders/vertexShader.glsl', function(vxShader){
+    vertexShader = vxShader;
+    loadTextFile('shaders/fragmentShader.glsl', function(fragShader){
+      fragmentShader = fragShader;
+      dae = collada.scene;
+      dae.traverse( function ( child ) {
+        if ( child instanceof THREE.SkinnedMesh ) {
+          var animation = new THREE.Animation( child, child.geometry.animation );
+          animation.play();
+        }
+      } );
+      dae.scale.x = dae.scale.y = dae.scale.z = 0.05;
+      dae.updateMatrix();
+      init();
+      animate();
+    });
+  });
 } );
+
+function loadTextFile(url, callback) {
+  var request = new XMLHttpRequest();
+  request.open('POST', url, true);
+  request.addEventListener('load', function() {
+     callback(request.responseText);
+  });
+  request.send();
+}
 
 function init() {
   container = document.createElement( 'div' );
@@ -46,6 +64,7 @@ function init() {
   // Textures
   var textureLoader = new THREE.TextureLoader();
 
+
   var sphereTex = textureLoader.load( 'assets/dev004_sphere_bg.jpg' );
   var sphereMat = new THREE.MeshPhongMaterial( { color: 0xffffff, map: sphereTex } );
 
@@ -55,8 +74,10 @@ function init() {
         time: { type: "f", value: 100 },
         weight: { type: "f", value: 0 }
       },
-      vertexShader: document.getElementById( 'vertexShader' ).textContent,
-      fragmentShader: document.getElementById( 'fragmentShader' ).textContent
+    //  vertexShader: document.getElementById( 'vertexShader' ).textContent,
+    //  fragmentShader: document.getElementById( 'fragmentShader' ).textContent
+      vertexShader: vertexShader,
+      fragmentShader: fragmentShader
 
     } );
 
