@@ -24,7 +24,7 @@ loader.load( 'assets/scene14.dae', function ( collada ) {
           animation.play();
         }
       } );
-      dae.scale.x = dae.scale.y = dae.scale.z = 0.02;
+      dae.scale.x = dae.scale.y = dae.scale.z = 0.03;
       dae.updateMatrix();
       dae.position.set(0,-15,0);
       init();
@@ -44,6 +44,8 @@ function loadTextFile(url, callback) {
 
 function init() {
   container = document.createElement( 'div' );
+  container.width = window.innerWidth;
+  container.height = window.innerHeight;
   document.body.appendChild( container );
   camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 200 );
   camera.position.set( 1, 1, 1);
@@ -60,7 +62,7 @@ function init() {
     geometry.vertices.push( new THREE.Vector3( i, - 0.04,   size ) );
   }
   var line = new THREE.LineSegments( geometry, material );
-  scene.add( line );
+  //scene.add( line );
 
   // Textures
   var textureLoader = new THREE.TextureLoader();
@@ -82,7 +84,7 @@ function init() {
 
     } );
 
-  var geometry = new THREE.SphereGeometry(100, 200, 200, 0, Math.PI * 2, 0, Math.PI * 2);
+  var geometry = new THREE.SphereGeometry(120, 100, 100, 0, Math.PI * 2, 0, Math.PI * 2);
   var material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
   var sphere = new THREE.Mesh(geometry, perlinMaterial);
 
@@ -144,9 +146,10 @@ function onDocumentMouseDown( event ) {
 
     raycaster.setFromCamera( mouse, camera );
 
-    var intersects = raycaster.intersectObjects( scene.children[2].children, true);
+    var intersects = raycaster.intersectObjects( scene.children[1].children, true);
 
     if ( intersects.length > 0 ) {
+    //  alert(mesh.name);
       var mesh  = intersects[0].object.parent;
       console.log(intersects[0].object.parent)
     //  alert(mesh.name);
