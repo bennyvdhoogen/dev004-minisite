@@ -1,3 +1,24 @@
+window.addEventListener('load',function(){
+	// var obj = {
+	//     number : 0,
+  //     range: [0,Math.PI],
+	//     string : 'minPolarAngle'
+	// };
+  // var obj2 = {
+	//     number : 0,
+  //     range: [0,Math.PI],
+	//     string : 'maxPolarAngle'
+	// };
+	// var controlKit = new ControlKit();
+	//     controlKit.addPanel()
+	//         .addGroup()
+	//             .addSubGroup()
+	//                 .addSlider(obj,'number', 'range', { label: obj.string, onChange: function(evt){ console.log(window.controls.minPolarAngle = obj.number); }})
+  //                 .addSlider(obj2,'number', 'range', { label: obj2.string, onChange: function(evt){ console.log(window.controls.maxPolarAngle = obj.number); }})
+	//                 .addStringInput(obj,'string');
+});
+
+
 if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
 var container, stats;
 var camera, scene, renderer, objects;
@@ -112,8 +133,10 @@ function init() {
 
   controls = new THREE.OrbitControls( camera, renderer.domElement );
   controls.enableDamping = true;
-  controls.dampingFactor = 0.55;
+  controls.dampingFactor = 0.0;
   controls.enableZoom = false;
+  controls.minPolarAngle = 1.60;
+  controls.maxPolarAngle = 2.10;
 
   window.addEventListener( 'resize', onWindowResize, false );
   window.addEventListener( 'mousedown', onDocumentMouseDown, false );
