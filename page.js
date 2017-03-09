@@ -100,10 +100,10 @@ function init() {
   directionalLight.position.y = Math.random() - 0.5;
   directionalLight.position.z = Math.random() - 0.5;
   directionalLight.position.normalize();
-  scene.add( directionalLight );
+  //scene.add( directionalLight );
 
   var pointLight = new THREE.PointLight( 0xffffff, 4 );
-  particleLight.add( pointLight );
+  //particleLight.add( pointLight );
 
   renderer = new THREE.WebGLRenderer();
   renderer.setPixelRatio( window.devicePixelRatio );

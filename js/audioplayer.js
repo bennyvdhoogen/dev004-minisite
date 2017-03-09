@@ -9,6 +9,7 @@ var trackOptions = {
   autoplay: false,
   loop: true,
   volume: 1,
+  html5: true,
   onend: function() {
     console.log('Track finished!');
   }
