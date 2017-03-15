@@ -133,10 +133,10 @@ function init() {
 
   controls = new THREE.OrbitControls( camera, renderer.domElement );
   controls.enableDamping = true;
-  controls.dampingFactor = 0.0;
+  controls.dampingFactor = 0.5;
   controls.enableZoom = false;
-  controls.minPolarAngle = 1.60;
-  controls.maxPolarAngle = 2.10;
+  controls.minPolarAngle = 1.00;
+//  controls.maxPolarAngle = 2.10;
 
   window.addEventListener( 'resize', onWindowResize, false );
   window.addEventListener( 'mousedown', onDocumentMouseDown, false );
@@ -152,6 +152,7 @@ function onWindowResize() {
 function onMouseMove( event ) {
 	// calculate mouse position in normalized device coordinates
 	// (-1 to +1) for both components
+  $('.menu').removeClass("short");
 
 	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
 	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
