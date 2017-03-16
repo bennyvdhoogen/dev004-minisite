@@ -15,4 +15,4 @@ Todo:
       -> 2 buttons: (download | buy)
   - [] Check out device orientational controls https://github.com/mrdoob/three.js/blob/master/examples/misc_controls_deviceorientation.html    
   - [x] See if the SoundCloud API can be used -> no response
-  - [] Header nav like in 003
+  - [x] Header nav like in 003
