@@ -10,7 +10,7 @@ Todo:
   - [x] Music player
   - [] Lazy load mp3s
   - [] Clean ups and presentation
-  - [] Download handling for full package
+  - [x] Download handling for full package
       -> Window met still background image
       -> 2 buttons: (download | buy)
   - [] Check out device orientational controls https://github.com/mrdoob/three.js/blob/master/examples/misc_controls_deviceorientation.html    

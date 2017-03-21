@@ -11,6 +11,35 @@ body {
 
 }
 
+.bg-img{
+  background-image: url("../assets/bg.jpg");
+  background-size: cover;
+}
+
+.content {
+  height:100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-outline{
+  width:100%;
+  margin:5px;
+  padding:5px;
+  color:black;
+  font-weight:500;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 0px;
+}
+
+
+.btn-outline:hover{
+  background-color: black;
+  color: white;
+}
+
 #blocker {
     position: absolute;
     width: 100%;
@@ -36,6 +65,10 @@ body {
     color: #ffffff;
     text-align: center;
     cursor: pointer;
+}
+
+.w-action {
+  width: 150xp;
 }
 
 .menu-wrapper{

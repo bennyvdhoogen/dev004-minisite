@@ -19,6 +19,11 @@
 		'mute' => [ "on" => "svg/mute-on.svg", "off" => "svg/mute-off.svg"]
 	];
 
+	$buttons = [
+		"download" => [ "txt" => "buy on bandcamp", "url" => "https://devorm.bandcamp.com"],
+		"redeem" => [ "txt" => "redeem download code", "url" => "https://devorm.bandcamp.com/yum"]
+	];
+
 	$links =[
 		"bc" => [ "txt" => "bandcamp", "url" => "http://www.bandcamp.com", 'icon' => ""],
 		"sc" => [ "txt" => "soundcloud", "url" => "http://www.soundcloud.com", 'icon' => ""],

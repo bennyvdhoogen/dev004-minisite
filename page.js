@@ -135,8 +135,8 @@ function init() {
   controls.enableDamping = true;
   controls.dampingFactor = 0.5;
   controls.enableZoom = false;
-  controls.minPolarAngle = 1.00;
-//  controls.maxPolarAngle = 2.10;
+  controls.minPolarAngle = 1.55;
+  controls.maxPolarAngle = 2.10;
 
   window.addEventListener( 'resize', onWindowResize, false );
   window.addEventListener( 'mousedown', onDocumentMouseDown, false );
@@ -174,12 +174,23 @@ function onDocumentMouseDown( event ) {
 
     if ( intersects.length > 0 ) {
     //  alert(mesh.name);
+
       var mesh  = intersects[0].object.parent;
+      if(mesh.name == 'Cylinder'){
+        moveToDownloadPage();
+      }
       console.log(intersects[0].object.parent)
     //  alert(mesh.name);
       window.songHandler.playSong(mesh.name);
 
     }
+}
+
+function moveToDownloadPage()
+{
+  console.log('download page'); 
+  window.location.href='get.php';
+
 }
 
 function animate() {
