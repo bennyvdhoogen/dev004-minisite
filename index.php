@@ -22,6 +22,7 @@
       <script src="js/Detector.js"></script>
       <script src="js/libs/stats.min.js"></script>
       <script src="js/controls/OrbitControls.js"></script>
+      <script src="js/controls/DeviceOrientationControls.js"></script>
       <script src="page.js"></script>
       <script src="document.js"></script>
       <script src="js/howler/howler.core.min.js"></script>
