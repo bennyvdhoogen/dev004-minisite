@@ -41,7 +41,10 @@ loader.load( 'assets/scene14.dae', function ( collada ) {
     loadTextFile('shaders/fragmentShader.glsl', function(fragShader){
       fragmentShader = fragShader;
       dae = collada.scene;
+			var symbolMeshMaterial = new THREE.MeshNormalMaterial( ) ; //3
+			var symbolMeshMaterial = new THREE.MeshPhongMaterial( { color: 0xdddddd, shininess: 10, shading: THREE.SmoothShading, opacity: 0.5, transparent: true } );
       dae.traverse( function ( child ) {
+				child.material = symbolMeshMaterial;
         if ( child instanceof THREE.SkinnedMesh ) {
           var animation = new THREE.Animation( child, child.geometry.animation );
           animation.play();
@@ -83,7 +86,6 @@ function init() {
   camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 200 );
   camera.position.set( 1, 1, 1);
   scene = new THREE.Scene();
-
   // Grid
   var size = 14, step = 1;
   var geometry = new THREE.Geometry();
@@ -107,16 +109,15 @@ function init() {
     perlinMaterial = new THREE.ShaderMaterial( {
       uniforms: {
         tShine: { type: "t", value: THREE.ImageUtils.loadTexture( 'assets/dev004_sphere_bg.jpg' ) },
-        time: { type: "f", value: 100 },
-        weight: { type: "f", value: 0 }
+        time: { type: "f", value: 1 },
+        weight: { type: "f", value: 0.001 },
+				pitchMod: { type: "f", value: 5 }
       },
-    //  vertexShader: document.getElementById( 'vertexShader' ).textContent,
-    //  fragmentShader: document.getElementById( 'fragmentShader' ).textContent
       vertexShader: vertexShader,
       fragmentShader: fragmentShader
 
     } );
-
+		window.perlinMaterial = perlinMaterial;
   var geometry = new THREE.SphereGeometry(120, 100, 100, 0, Math.PI * 2, 0, Math.PI * 2);
   var material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
   var sphere = new THREE.Mesh(geometry, perlinMaterial);
@@ -133,10 +134,10 @@ function init() {
   directionalLight.position.y = Math.random() - 0.5;
   directionalLight.position.z = Math.random() - 0.5;
   directionalLight.position.normalize();
-  //scene.add( directionalLight );
+//  scene.add( directionalLight );
 
   var pointLight = new THREE.PointLight( 0xffffff, 4 );
-  //particleLight.add( pointLight );
+//  particleLight.add( pointLight );
 
   renderer = new THREE.WebGLRenderer();
   renderer.setPixelRatio( window.devicePixelRatio );
@@ -225,7 +226,6 @@ function onDocumentMouseDown( event ) {
 
     if ( intersects.length > 0 ) {
     //  alert(mesh.name);
-
       var mesh  = intersects[0].object.parent;
       if(mesh.name == 'Cylinder'){
         moveToDownloadPage();

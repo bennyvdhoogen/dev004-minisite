@@ -4,6 +4,7 @@
 	varying float ao;
 	uniform sampler2D tShine;
 	uniform float time;
+  uniform float pitchMod;
 
 	float PI = 3.14159265358979323846264;
 
@@ -11,7 +12,7 @@
 
 		float yaw = .5 - atan( vReflect.z, - vReflect.x ) / ( 2.0 * PI );
 		float pitch = .5 - asin( vReflect.y ) / PI;
-		vec2 pos = vec2( yaw, pitch );
+		vec2 pos = vec2( yaw, pitch * pitchMod);
 		vec3 color = texture2D( tShine, pos ).rgb;
 
 		float diffuse_value1 = .0015 * max(dot(vNormal, vec3( -490.0, 29.8, -85.8 ) ), 0.0);
