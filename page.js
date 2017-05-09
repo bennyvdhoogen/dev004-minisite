@@ -18,6 +18,8 @@ window.addEventListener('load',function(){
 	//                 .addStringInput(obj,'string');
 });
 
+window.addEventListener( 'deviceorientation', function(event){ if(event.alpha != null){ window.deviceOrientationSupported = true; } else { window.deviceOrientationSupported = false;}}, false );
+
 
 if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
 var container, stats;
@@ -53,6 +55,16 @@ loader.load( 'assets/scene14.dae', function ( collada ) {
     });
   });
 } );
+
+var unlockIOSAudioPlayback = function () {
+  console.log('unlock ioS playback');
+    var context = Howler.ctx;
+    var oscillator = context.createOscillator();
+    oscillator.frequency.value = 200;
+    oscillator.connect(context.destination);
+    oscillator.start(0);
+    oscillator.stop(0);
+};
 
 function loadTextFile(url, callback) {
   var request = new XMLHttpRequest();
@@ -131,15 +143,21 @@ function init() {
   renderer.setSize( window.innerWidth, window.innerHeight );
   container.appendChild( renderer.domElement );
 
-  controls = new THREE.OrbitControls( camera, renderer.domElement );
-  controls.enableDamping = true;
-  controls.dampingFactor = 0.5;
-  controls.enableZoom = false;
-  controls.minPolarAngle = 1.55;
-  controls.maxPolarAngle = 2.10;
+  if(window.deviceOrientationSupported){
+      DOcontrols = new THREE.DeviceOrientationControls( camera );
+  }else{
+    controls = new THREE.OrbitControls( camera, renderer.domElement );
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.5;
+    controls.enableZoom = false;
+    controls.minPolarAngle = 1.55;
+    controls.maxPolarAngle = 2.10;
+  }
 
   window.addEventListener( 'resize', onWindowResize, false );
   window.addEventListener( 'mousedown', onDocumentMouseDown, false );
+  window.addEventListener( 'touchstart', onTouchStart, false );
+  window.addEventListener( 'touchend', onTouchEnd, false );
   window.addEventListener( 'mousemove', onMouseMove, false );
 
 }
@@ -157,6 +175,39 @@ function onMouseMove( event ) {
 	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
 	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 
+}
+
+function onTouchEnd(event){
+  console.log('t end');
+  unlockIOSAudioPlayback();
+  onTouchStart(event);
+}
+
+function onTouchStart(event){
+  console.log(event);
+  console.log(raycaster);
+
+  unlockIOSAudioPlayback();
+
+  mouse.x = +(event.targetTouches[0].pageX / window.innerWidth) * 2 +-1;
+  mouse.y = -(event.targetTouches[0].pageY / window.innerHeight) * 2 + 1;
+
+  raycaster.setFromCamera( mouse, camera );
+
+  var intersects = raycaster.intersectObjects( scene.children[1].children, true);
+
+  if ( intersects.length > 0 ) {
+  //  alert(mesh.name);
+
+    var mesh  = intersects[0].object.parent;
+    if(mesh.name == 'Cylinder'){
+      moveToDownloadPage();
+    }
+    console.log(intersects[0].object.parent)
+  //  alert(mesh.name);
+    window.songHandler.playSong(mesh.name);
+
+  }
 }
 
 function onDocumentMouseDown( event ) {
@@ -188,7 +239,7 @@ function onDocumentMouseDown( event ) {
 
 function moveToDownloadPage()
 {
-  console.log('download page'); 
+  console.log('download page');
   window.location.href='get.php';
 
 }
@@ -196,6 +247,9 @@ function moveToDownloadPage()
 function animate() {
   requestAnimationFrame( animate );
   render();
+  if(window.deviceOrientationSupported){
+    DOcontrols.update();
+  }
 }
 
 var clock = new THREE.Clock();
