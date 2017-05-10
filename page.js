@@ -35,7 +35,7 @@ var fragmentShader;
 
 
 loader.options.convertUpAxis = true;
-loader.load( 'assets/scene14.dae', function ( collada ) {
+loader.load( 'assets/scene100-red.dae', function ( collada ) {
   loadTextFile('shaders/vertexShader.glsl', function(vxShader){
     vertexShader = vxShader;
     loadTextFile('shaders/fragmentShader.glsl', function(fragShader){
@@ -43,8 +43,22 @@ loader.load( 'assets/scene14.dae', function ( collada ) {
       dae = collada.scene;
 			var symbolMeshMaterial = new THREE.MeshNormalMaterial( ) ; //3
 			var symbolMeshMaterial = new THREE.MeshPhongMaterial( { color: 0xdddddd, shininess: 10, shading: THREE.SmoothShading, opacity: 0.5, transparent: true } );
+			var invisMaterial = new THREE.MeshNormalMaterial( ) ; //3
+			dae.children.forEach(function(item){
+				if(item.name.indexOf('invis_') != -1){
+						item.children.forEach(function(mesh){
+								mesh.material = invisMaterial;
+								mesh.material.visible = false;
+						});
+				}else{
+					item.children.forEach(function(mesh){
+							mesh.material = symbolMeshMaterial;
+					});
+				}
+
+			});
       dae.traverse( function ( child ) {
-				child.material = symbolMeshMaterial;
+
         if ( child instanceof THREE.SkinnedMesh ) {
           var animation = new THREE.Animation( child, child.geometry.animation );
           animation.play();

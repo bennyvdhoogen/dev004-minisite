@@ -27,6 +27,8 @@ window['songHandler'] = {
   varPrefix : 'track_',
   songVars : {},
   playSong : function(songName){
+    songName = songName.replace('invis_', '');
+    alert('Play: ' + songName); 
     for(key in this.songVars){
       window[this.songVars[key]].stop();
       if(key == songName){
