@@ -1,3 +1,35 @@
+SC.initialize({
+  client_id: 'B4dzsr4tDHKQqDMMMREfUnwrwJzvGaD2'
+});
+
+var id = 293
+
+var scPlayer;
+SC.stream('/tracks/' + id).then(function(player){
+  console.log(player);
+
+  // making sure that 'http' is the first item in .protocols seems to fix issues with the flash obj being blocked
+  player.options.protocols = [
+    "http",
+    "rtmp"
+  ];
+
+//  player.play()
+  scPlayer = player;
+});
+
+function playTrack(trackNumber){
+  alert('playTrack');
+  if(trackNumber){
+    window.SC.Widget('soundcloud-player').skip(trackNumber);
+  }
+  window.SC.Widget('soundcloud-player').play();
+}
+
+//sound2 = new newSound(313537641);
+//newSound(313331549);
+
+
 songs = [{"name": "money", "src":"assets/snd/one.mp3"},
          {"name": "arab", "src":"assets/snd/two.mp3"},
          {"name": "sphlash", "src":"assets/snd/three.mp3"},
@@ -28,7 +60,18 @@ window['songHandler'] = {
   songVars : {},
   playSong : function(songName){
     songName = songName.replace('invis_', '');
-    alert('Play: ' + songName); 
+    var songIndex;
+    window['songs'].forEach(function(item, key){
+        if(item.name == songName){
+          songIndex = key;
+        }
+    });
+    window.playTrack(songIndex);
+    return true;
+
+    //
+    //
+    alert('Play: ' + songName);
     for(key in this.songVars){
       window[this.songVars[key]].stop();
       if(key == songName){

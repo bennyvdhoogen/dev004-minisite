@@ -13,6 +13,8 @@
       <meta property="og:image" content="<?= $meta['image']; ?>">
       <meta property="og:url" content="<?= $meta['url']; ?>">
       <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+      <script src="https://connect.soundcloud.com/sdk/sdk-3.1.2.js"></script>
+      <script src="https://w.soundcloud.com/player/api.js"></script>
       <script src="js/three.min.js"></script>
       <script src="js/controls/PointerLockControls.js"></script>
       <script src="js/loaders/collada/Animation.js"></script>
@@ -43,6 +45,10 @@
               }
               ?>
           </ul>
+        </div>
+        <iframe width="100%" height="450" style="display:none;" scrolling="no" frameborder="no" id="soundcloud-player"
+                src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/304658516&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false">
+        </iframe>
         </div>
         <div class="float-left m-6 hidden-xs">
           <div id="mute-btn" class="mute-btn mute-btn-unmuted"></div>
