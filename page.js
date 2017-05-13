@@ -1,20 +1,20 @@
 window.addEventListener('load',function(){
 	// var obj = {
 	//     number : 0,
-  //     range: [0,Math.PI],
-	//     string : 'minPolarAngle'
+  //     range: [Math.PI * -1,Math.PI],
+	//     string : 'X'
 	// };
   // var obj2 = {
 	//     number : 0,
-  //     range: [0,Math.PI],
-	//     string : 'maxPolarAngle'
+  //     range: [Math.PI * -1,Math.PI],
+	//     string : 'Y'
 	// };
 	// var controlKit = new ControlKit();
 	//     controlKit.addPanel()
 	//         .addGroup()
 	//             .addSubGroup()
-	//                 .addSlider(obj,'number', 'range', { label: obj.string, onChange: function(evt){ console.log(window.controls.minPolarAngle = obj.number); }})
-  //                 .addSlider(obj2,'number', 'range', { label: obj2.string, onChange: function(evt){ console.log(window.controls.maxPolarAngle = obj.number); }})
+	//                 .addSlider(obj,'number', 'range', { label: obj.string, onChange: function(evt){ console.log(window.camera.position.x = obj.number); }})
+  //                 .addSlider(obj2,'number', 'range', { label: obj2.string, onChange: function(evt){ console.log(window.camera.position.y = obj.number); }})
 	//                 .addStringInput(obj,'string');
 });
 
@@ -41,9 +41,11 @@ loader.load( 'assets/scene100-red.dae', function ( collada ) {
     loadTextFile('shaders/fragmentShader.glsl', function(fragShader){
       fragmentShader = fragShader;
       dae = collada.scene;
-			var symbolMeshMaterial = new THREE.MeshNormalMaterial( ) ; //3
-			var symbolMeshMaterial = new THREE.MeshPhongMaterial( { color: 0xdddddd, shininess: 10, shading: THREE.SmoothShading, opacity: 0.5, transparent: true } );
 			var invisMaterial = new THREE.MeshNormalMaterial( ) ; //3
+			var invisMaterial = new THREE.MeshPhongMaterial( { color: 0xdddddd, shininess: 10, shading: THREE.SmoothShading, opacity: 0.5, transparent: true } );
+	//		var symbolMeshMaterial = new THREE.MeshPhongMaterial( { color: 0xdddddd, shininess: 10, shading: THREE.SmoothShading, opacity: 0.5, transparent: true } );
+
+			var symbolMeshMaterial = new THREE.MeshNormalMaterial( )
 			dae.children.forEach(function(item){
 				if(item.name.indexOf('invis_') != -1){
 						item.children.forEach(function(mesh){
@@ -52,7 +54,7 @@ loader.load( 'assets/scene100-red.dae', function ( collada ) {
 						});
 				}else{
 					item.children.forEach(function(mesh){
-							mesh.material = symbolMeshMaterial;
+							mesh.children[0].children[0].material = symbolMeshMaterial;
 					});
 				}
 
@@ -125,7 +127,7 @@ function init() {
         tShine: { type: "t", value: THREE.ImageUtils.loadTexture( 'assets/dev004_sphere_bg.jpg' ) },
         time: { type: "f", value: 1 },
         weight: { type: "f", value: 0.001 },
-				pitchMod: { type: "f", value: 5 }
+				pitchMod: { type: "f", value: 1 }
       },
       vertexShader: vertexShader,
       fragmentShader: fragmentShader
@@ -167,6 +169,7 @@ function init() {
     controls.enableZoom = false;
     controls.minPolarAngle = 1.55;
     controls.maxPolarAngle = 2.10;
+		controls.reset();
   }
 
   window.addEventListener( 'resize', onWindowResize, false );
@@ -174,12 +177,18 @@ function init() {
   window.addEventListener( 'touchstart', onTouchStart, false );
   window.addEventListener( 'touchend', onTouchEnd, false );
   window.addEventListener( 'mousemove', onMouseMove, false );
+	window.addEventListener( 'mousewheel', onMouseWheel, false );
 
 }
 function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize( window.innerWidth, window.innerHeight );
+}
+
+function onMouseWheel(event){
+	console.log(event);
+	controls.rotate(0.001 * event.deltaY);
 }
 
 function onMouseMove( event ) {
@@ -202,8 +211,12 @@ function onTouchStart(event){
   console.log(event);
   console.log(raycaster);
 
-  unlockIOSAudioPlayback();
 
+  if(event.targetTouches){
+
+	}else{
+		return false;
+	}
   mouse.x = +(event.targetTouches[0].pageX / window.innerWidth) * 2 +-1;
   mouse.y = -(event.targetTouches[0].pageY / window.innerHeight) * 2 + 1;
 
@@ -214,7 +227,7 @@ function onTouchStart(event){
   if ( intersects.length > 0 ) {
   //  alert(mesh.name);
 
-    var mesh  = intersects[0].object.parent;
+    var mesh  = intersects[0].object.parent; 
     if(mesh.name == 'Cylinder'){
       moveToDownloadPage();
     }
@@ -270,9 +283,10 @@ var clock = new THREE.Clock();
 var start = Date.now();
 
 function render() {
-  perlinMaterial.uniforms[ 'time' ].value = .00025 * ( Date.now() - start );
-	perlinMaterial.uniforms[ 'weight' ].value = 10.0 * ( .5 + .5 * Math.sin( .00025 * ( Date.now() - start ) ) );
-	perlinMaterial.uniforms[ 'weight' ].value = 10.0;
+  perlinMaterial.uniforms[ 'time' ].value = .0005 * ( Date.now() - start );
+	perlinMaterial.uniforms[ 'pitchMod' ].value = .0005 * ( Date.now() - start );
+	perlinMaterial.uniforms[ 'weight' ].value = 1.0 * ( .5 + .5 * Math.sin( .00025 * ( Date.now() - start ) ) );
+	//perlinMaterial.uniforms[ 'weight' ].value = 10.0;
   var timer = Date.now() * 0.0005;
   radious = 1;
   camera.updateMatrix();
