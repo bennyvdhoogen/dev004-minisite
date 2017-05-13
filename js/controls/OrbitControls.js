@@ -277,6 +277,11 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 	}
 
+	this.rotate = function(ang){
+		rotateLeft(ang);
+		scope.update();
+	}
+
 	function rotateLeft( angle ) {
 
 		sphericalDelta.theta -= angle;
@@ -499,7 +504,9 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 	function handleMouseWheel( event ) {
 
-		//console.log( 'handleMouseWheel' );
+		console.log( 'handleMouseWheel' );
+
+		this.rotL(0.0001);
 
 		var delta = 0;
 
@@ -892,7 +899,7 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 	scope.domElement.addEventListener( 'contextmenu', onContextMenu, false );
 
-	scope.domElement.addEventListener( 'mousedown', onMouseDown, false );
+	//scope.domElement.addEventListener( 'mousedown', onMouseDown, false );
 	scope.domElement.addEventListener( 'mousewheel', onMouseWheel, false );
 	scope.domElement.addEventListener( 'MozMousePixelScroll', onMouseWheel, false ); // firefox
 
