@@ -202,8 +202,12 @@ function onTouchStart(event){
   console.log(event);
   console.log(raycaster);
 
-  unlockIOSAudioPlayback();
 
+  if(event.targetTouches){
+
+	}else{
+		return false;
+	}
   mouse.x = +(event.targetTouches[0].pageX / window.innerWidth) * 2 +-1;
   mouse.y = -(event.targetTouches[0].pageY / window.innerHeight) * 2 + 1;
 
@@ -214,7 +218,7 @@ function onTouchStart(event){
   if ( intersects.length > 0 ) {
   //  alert(mesh.name);
 
-    var mesh  = intersects[0].object.parent;
+    var mesh  = intersects[0].object.parent; 
     if(mesh.name == 'Cylinder'){
       moveToDownloadPage();
     }
