@@ -6,29 +6,31 @@
       <title><?= $meta['title']; ?></title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-      <link rel="stylesheet" type="text/css" href="css/style.css" media="screen" />
-      <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
       <meta property="og:title" content="<?= $meta['title']; ?>">
       <meta property="og:description" content="<?= $meta['description']; ?>">
       <meta property="og:image" content="<?= $meta['image']; ?>">
       <meta property="og:url" content="<?= $meta['url']; ?>">
+      <link rel="stylesheet" type="text/css" href="styles/css/style.css" media="screen" />
+      <link rel="stylesheet" type="text/css" href="styles/css/bootstrap.min.css"/>
       <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
       <script src="https://connect.soundcloud.com/sdk/sdk-3.1.2.js"></script>
       <script src="https://w.soundcloud.com/player/api.js"></script>
-      <script src="js/three.min.js"></script>
-      <script src="js/controls/PointerLockControls.js"></script>
-      <script src="js/loaders/collada/Animation.js"></script>
-      <script src="js/loaders/collada/AnimationHandler.js"></script>
-      <script src="js/loaders/collada/KeyFrameAnimation.js"></script>
-      <script src="js/loaders/ColladaLoader.js"></script>
-      <script src="js/Detector.js"></script>
-      <script src="js/libs/stats.min.js"></script>
-      <script src="js/controls/OrbitControls.js"></script>
-      <script src="js/controls/DeviceOrientationControls.js"></script>
-      <script src="page.js"></script>
-      <script src="document.js"></script>
-      <script src="js/howler/howler.core.min.js"></script>
-      <script src="js/audioplayer.js"></script>
+      <script src="js/libs/three.min.js"></script>
+      <script src="js/components/controls/OrbitControls.js"></script>
+      <script src="js/components/controls/DeviceOrientationControls.js"></script>
+      <script src="js/components/controls/PointerLockControls.js"></script>
+      <script src="js/components/loaders/collada/Animation.js"></script>
+      <script src="js/components/loaders/collada/AnimationHandler.js"></script>
+      <script src="js/components/loaders/collada/KeyFrameAnimation.js"></script>
+      <script src="js/components/loaders/ColladaLoader.js"></script>
+      <script src="js/components/loaders/Detector.js"></script>
+      <script src="js/components/_main.js"></script>
+      <script src="js/components/StateManager.js"></script>
+      <script src="js/components/NavigationController.js"></script>
+      <script src="js/components/SoundManager.js"></script>
+      <!-- <script src="js/components/world/init.js"></script>
+      <script src="js/components/world/setup.js"></script>
+      <script src="js/components/world/render.js"></script> -->
       <script type='text/javascript' src='js/controlkit/controlKit.min.js'></script>
   </head>
   <body>
