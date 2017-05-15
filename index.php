@@ -24,13 +24,15 @@
       <script src="js/components/loaders/collada/KeyFrameAnimation.js"></script>
       <script src="js/components/loaders/ColladaLoader.js"></script>
       <script src="js/components/loaders/Detector.js"></script>
-      <script src="js/components/_main.js"></script>
       <script src="js/components/StateManager.js"></script>
+      <script src="js/components/_main.js"></script>
+      <!-- <script src="js/components/_debug.js"></script> -->
+      <script src="js/components/world/setup.js"></script>
+      <script src="js/components/world/init.js"></script>
+      <script src="js/components/world/render.js"></script>
+      <script src="js/components/InputController.js"></script>
       <script src="js/components/NavigationController.js"></script>
       <script src="js/components/SoundManager.js"></script>
-      <!-- <script src="js/components/world/init.js"></script>
-      <script src="js/components/world/setup.js"></script>
-      <script src="js/components/world/render.js"></script> -->
       <script type='text/javascript' src='js/controlkit/controlKit.min.js'></script>
   </head>
   <body>

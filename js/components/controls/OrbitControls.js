@@ -282,6 +282,11 @@ THREE.OrbitControls = function ( object, domElement ) {
 		scope.update();
 	}
 
+	this.rotUp = function(ang){
+		rotateUp(ang);
+		scope.update();
+	}
+
 	function rotateLeft( angle ) {
 
 		sphericalDelta.theta -= angle;
