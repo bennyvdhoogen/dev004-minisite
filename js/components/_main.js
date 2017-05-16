@@ -8,8 +8,21 @@ function loadTextFile(url, callback) {
   request.send();
 }
 
+function goToState(id){
+  StateManager.setCurrentState(id);
+}
+
 // run after document load
 window.addEventListener('load',function(){
-	StateManager.setState(0);
-  StateManager.setState(1);
+	StateManager.setCurrentState(0);
+  //StateManager.setCurrentState(1);
+});
+
+window.addEventListener('statestatus',function(evt){
+  data = evt.detail;
+  stateUpdateObject = {
+    id: data.stateId,
+    ready: true,
+  }
+  StateManager.updateState(stateUpdateObject);
 });

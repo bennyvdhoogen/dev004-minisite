@@ -18,21 +18,30 @@ SC.stream('/tracks/' + id).then(function(player){
   scPlayer = player;
 });
 
-function mutePlayer(elem){
+function mutePlayer(){
+  console.log(' mutelpayer');
   var player = window.SC.Widget('soundcloud-player');
-  player.toggle();
-  console.log('mutePlayer');
-  if (player.isPaused()){
+  var elem = document.getElementById('mute-btn');
+
+  player.pause();
+  var playerPaused = false;
+    player.isPaused(function(bool){
+      console.log(bool);
+      playerPaused = bool;
+    })
+
+  if (playerPaused){
       elem.className = "mute-btn mute-btn-muted";
-  }else{
+  }else{ 
       elem.className = "mute-btn mute-btn-unmuted";
   }
-
-  debugger;
-
+  console.log('mutePlayer');
 }
 
 function playTrack(trackNumber){
+//  mutePlayer();
+var player = window.SC.Widget('soundcloud-player');
+player.pause();
   alert('playTrack');
   if(trackNumber){
     window.SC.Widget('soundcloud-player').skip(trackNumber);

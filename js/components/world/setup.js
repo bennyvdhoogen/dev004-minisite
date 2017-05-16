@@ -51,6 +51,10 @@ window.addEventListener( 'deviceorientation', function(event){
 	       dae.scale.x = dae.scale.y = dae.scale.z = 0.03;
 	       dae.updateMatrix();
 	       dae.position.set(0,-15,0);
+				 statusObj = {};
+				 statusObj.stateId = 1;
+				 var evtStateReady = new CustomEvent('statestatus', { 'detail': statusObj});
+				 window.dispatchEvent(evtStateReady);
 	  //     init();
 	  //     animate();
 	     });

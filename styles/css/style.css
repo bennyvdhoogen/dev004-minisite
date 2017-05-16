@@ -11,6 +11,12 @@ body {
 
 }
 
+.splash-lead-text{
+    text-align: center;
+    font-family: Times;
+    font-size: 80px;
+}
+
 .bg-img{
   background-image: url("../assets/bg.jpg");
   background-size: cover;
@@ -87,6 +93,11 @@ body {
   color: black;
   background-color: white;
   border: 1px solid black;
+  width: 205px;
+  height: 31px;
+}
+
+.menu:hover{
   width: 575px;
   height: 31px;
 }

@@ -24,7 +24,8 @@ Structure:
 
   - Create gulp flow
   - Sassss
-
+  - Remove project
+  - Remove reusable ray
 
 ├── assets/
 |   ├── (sound/) (-- MOVED TO /_misc/ --)
