@@ -14,9 +14,27 @@ function onMouseMove( event ) {
 	// calculate mouse position in normalized device coordinates
 	// (-1 to +1) for both components
   $('.menu').removeClass("short");
-
 	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
 	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+ console.log(event);
+    controls.rotUp(Math.sin(mouse.y /200) * -1);
+
+    // exp
+
+    raycaster.setFromCamera( mouse, camera );
+
+    var intersects = raycaster.intersectObjects( scene.children[1].children, true);
+    document.body.style.cursor = 'default';
+
+    if ( intersects.length > 0 ) {
+
+      var mesh  = intersects[0].object.parent;
+    //  mesh.rotateY(0.1);
+      document.body.style.cursor = 'pointer';
+
+      }
+
+
 
 }
 

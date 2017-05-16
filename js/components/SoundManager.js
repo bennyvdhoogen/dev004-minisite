@@ -18,6 +18,20 @@ SC.stream('/tracks/' + id).then(function(player){
   scPlayer = player;
 });
 
+function mutePlayer(elem){
+  var player = window.SC.Widget('soundcloud-player');
+  player.toggle();
+  console.log('mutePlayer');
+  if (player.isPaused()){
+      elem.className = "mute-btn mute-btn-muted";
+  }else{
+      elem.className = "mute-btn mute-btn-unmuted";
+  }
+
+  debugger;
+
+}
+
 function playTrack(trackNumber){
   alert('playTrack');
   if(trackNumber){

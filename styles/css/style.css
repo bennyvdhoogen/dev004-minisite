@@ -175,12 +175,12 @@ padding-right: 15px;
 
 .mute-btn-muted{
   background-size: contain;
-  background-image: url("../svg/mute-on.svg");
+  background-image: url("../../assets/svg/mute-on.svg");
 }
 
 .mute-btn-unmuted{
   background-size: contain;
-  background-image: url("../svg/mute-off.svg");
+  background-image: url("../../assets/svg/mute-off.svg");
 }
 
 .short{

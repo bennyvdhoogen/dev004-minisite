@@ -72,7 +72,7 @@ function init() {
     controls.dampingFactor = 0.5;
     controls.enableZoom = false;
     controls.minPolarAngle = 1.55;
-    controls.maxPolarAngle = 2.10;
+    controls.maxPolarAngle = 1.80;
 		controls.reset();
   }
 
