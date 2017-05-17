@@ -12,9 +12,14 @@ function goToState(id){
   StateManager.setCurrentState(id);
 }
 
+function mutePlayer(){
+  SoundManager.muteAllToggle();
+}
+
 // run after document load
 window.addEventListener('load',function(){
 	StateManager.setCurrentState(0);
+  SoundManager.attachSCPlayer();
   //StateManager.setCurrentState(1);
 });
 

@@ -1,108 +1,66 @@
-SC.initialize({
-  client_id: 'B4dzsr4tDHKQqDMMMREfUnwrwJzvGaD2'
-});
+var SoundManager = (function () {
+	var self = {};
+  // idle, playing, muted
+  self.status = 'idle'; //
+  self.isMuted = false;
+  self.soundcloudPlayer;
 
-var id = 293
-
-var scPlayer;
-SC.stream('/tracks/' + id).then(function(player){
-  console.log(player);
-
-  // making sure that 'http' is the first item in .protocols seems to fix issues with the flash obj being blocked
-  player.options.protocols = [
-    "http",
-    "rtmp"
+  self.songs = [
+       {"name": "money", "src":"assets/snd/one.mp3"},
+       {"name": "arab", "src":"assets/snd/two.mp3"},
+       {"name": "sphlash", "src":"assets/snd/three.mp3"},
+       {"name": "smile", "src":"assets/snd/four.mp3"},
+       {"name": "slime", "src":"assets/snd/four.mp3"},
+       {"name": "hand", "src":"assets/snd/five.mp3"}
   ];
 
-//  player.play()
-  scPlayer = player;
-});
-
-function mutePlayer(){
-  console.log(' mutelpayer');
-  var player = window.SC.Widget('soundcloud-player');
-  var elem = document.getElementById('mute-btn');
-
-  player.pause();
-  var playerPaused = false;
-    player.isPaused(function(bool){
-      console.log(bool);
-      playerPaused = bool;
-    })
-
-  if (playerPaused){
-      elem.className = "mute-btn mute-btn-muted";
-  }else{ 
-      elem.className = "mute-btn mute-btn-unmuted";
-  }
-  console.log('mutePlayer');
-}
-
-function playTrack(trackNumber){
-//  mutePlayer();
-var player = window.SC.Widget('soundcloud-player');
-player.pause();
-  alert('playTrack');
-  if(trackNumber){
-    window.SC.Widget('soundcloud-player').skip(trackNumber);
-  }
-  window.SC.Widget('soundcloud-player').play();
-}
-
-//sound2 = new newSound(313537641);
-//newSound(313331549);
-
-
-songs = [{"name": "money", "src":"assets/snd/one.mp3"},
-         {"name": "arab", "src":"assets/snd/two.mp3"},
-         {"name": "sphlash", "src":"assets/snd/three.mp3"},
-         {"name": "smile", "src":"assets/snd/four.mp3"},
-         {"name": "slime", "src":"assets/snd/four.mp3"},
-         {"name": "hand", "src":"assets/snd/five.mp3"}];
-
-var trackOptions = {
-  autoplay: false,
-  loop: true,
-  volume: 1,
-//  html5: true,
-  onend: function() {
-    console.log('Track finished!');
-  }
-};
-
-songs.forEach(function(item){
-    var options = trackOptions;
-    options['src'] = item["src"];
-});
-
-var varPrefix = 'track_';
-
-window['songHandler'] = {
-  varPrefix : 'track_',
-  songVars : {},
-  playSong : function(songName){
-    songName = songName.replace('invis_', '');
-    var songIndex;
-    window['songs'].forEach(function(item, key){
+  self.playTrackByName = function(songName){
+    var songName = songName.replace("invis_", "");
+    var songIndex = 0;
+    debugger;
+    self.songs.forEach(function(item, key){
         if(item.name == songName){
           songIndex = key;
         }
     });
-    window.playTrack(songIndex);
-    return true;
 
-    //
-    //
-    alert('Play: ' + songName);
-    for(key in this.songVars){
-      window[this.songVars[key]].stop();
-      if(key == songName){
-          window[this.songVars[key]].play();
-      }
-    }
+    self.playTrack(songIndex);
+    debugger;
   }
-};
 
-window['songs'].forEach(function(item){
-    window.songHandler['songVars'][item['name']] = varPrefix + item['name'];
-});
+
+  self.attachSCPlayer = function(){
+    self.soundcloudPlayer = window.SC.Widget('soundcloud-player');
+    debugger;
+  }
+
+  self.playTrack = function(trackNumber){
+      var player = self.soundcloudPlayer;
+
+      player.isPlay
+      alert('playTrack');
+      if(trackNumber){
+      //  player.pause();
+        player.skip(trackNumber);
+        player.play();
+      }
+  }
+
+  self.muteAllToggle = function(){
+    self.isMuted = !self.isMuted;
+    var muteBtnElem = document.getElementById('mute-btn');
+    switch(self.isMuted){
+      case true:
+            self.soundcloudPlayer.setVolume(0);
+            muteBtnElem.className = "mute-btn mute-btn-muted";
+            break;
+      case false:
+            self.soundcloudPlayer.setVolume(100);
+            muteBtnElem.className = "mute-btn mute-btn-unmuted";
+            break;
+    }
+    // logic that mutes all audio output
+  }
+
+	return self;
+}());

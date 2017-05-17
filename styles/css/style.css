@@ -179,9 +179,15 @@ padding-right: 15px;
 }
 
 .mute-btn{
+  border: none;
+  background-color: transparent;
   background-repeat:no-repeat;
   width: 25px;
   height: 25px;
+}
+
+.mute-btn:focus {
+  outline:0;
 }
 
 .mute-btn-muted{

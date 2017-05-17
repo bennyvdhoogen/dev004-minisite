@@ -68,7 +68,7 @@ function onTouchStart(event){
     }
     console.log(intersects[0].object.parent)
   //  alert(mesh.name);
-    window.songHandler.playSong(mesh.name);
+    SoundManager.playTrackByName(mesh.name);
 
   }
 }
@@ -94,7 +94,7 @@ function onDocumentMouseDown( event ) {
       }
       console.log(intersects[0].object.parent)
     //  alert(mesh.name);
-      window.songHandler.playSong(mesh.name);
+      SoundManager.playTrackByName(mesh.name);
 
     }
 }

@@ -66,13 +66,13 @@ var StateManager = (function () {
 			self.currentState.init();
 			return true;
 		}
-		return false; 
+		return false;
 	}
 
 	self.drawFetch = function(){
 		var bodyElement = document.body;
 		var template = '<div id="fetch-page" class="content bg-img"><div class="col-xs-8 col-sm-4 col-md-3 col-lg-2"><a href="" target="_blank" class="btn btn-outline"> dl ?></a><a href="" target="_blank" class="btn btn-outline"> redeem?> </a></div></div>'
-		bodyElement.insertAdjacentHTML('beforeend', template);;
+		bodyElement.insertAdjacentHTML('beforeend', template);
 	}
 
 	self.removeFetch = function(){
