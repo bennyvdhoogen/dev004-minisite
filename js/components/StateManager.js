@@ -1,14 +1,34 @@
 var StateManager = (function () {
 	var self = {};
+
 	self.states = [
-    {
+		{
 			id: 0,
+			name:"initialize",
+			ready: false,
+			init: function(){
+				// only run once
+					window.init();
+					console.log('Loaded : 1 / 4');
+					window.render();
+					console.log('Loaded : 2 / 4');
+					window.animate();
+					console.log('Loaded : 3 / 4');
+					window.scene.add( dae );
+					console.log('Loaded : 4 / 4');
+					self.updateState({id: 0, ready: true});
+					self.setCurrentState(1);
+				//
+			},
+			destroy: function(){
+				//
+			}
+		},
+    {
+			id: 1,
 			name:"splash",
 			ready: false,
 			init: function(){
-				window.init();
-				window.render();
-			  window.animate();
 				self.drawSplash();
 			},
 			destroy: function(){
@@ -16,19 +36,18 @@ var StateManager = (function () {
 			}
 		},
     {
-			id: 1,
+			id: 2,
 			name:"scene",
 			ready: false,
 			init: function(){
-				window.scene.add( dae );
-				debugger;
+				//
 			},
 			destroy: function(){
 				//
 			}
 		},
 		{
-			id: 2,
+			id: 3,
 			name:"fetch",
 			ready: true,
 			init: function(){
@@ -58,6 +77,11 @@ var StateManager = (function () {
 	}
 
 	self.setCurrentState = function(id) {
+		if(id == 0 && self.states[0].ready){
+			console.log('Init already done.');
+			return false;
+		}
+
 		if(self.states[id]){
 			if(self.currentState.id != id){
 					self.currentState.destroy();
@@ -70,14 +94,13 @@ var StateManager = (function () {
 	}
 
 	self.drawFetch = function(){
-		var bodyElement = document.body;
-		var template = '<div id="fetch-page" class="content bg-img"><div class="col-xs-8 col-sm-4 col-md-3 col-lg-2"><a href="" target="_blank" class="btn btn-outline"> dl ?></a><a href="" target="_blank" class="btn btn-outline"> redeem?> </a></div></div>'
-		bodyElement.insertAdjacentHTML('beforeend', template);
+		var fetchPageElem = document.getElementById('fetch-page');
+		fetchPageElem.style.display = '';
 	}
 
 	self.removeFetch = function(){
-		var element = document.getElementById("fetch-page");
-		element.parentNode.removeChild(element);
+		var fetchPageElem = document.getElementById('fetch-page');
+		fetchPageElem.style.display = 'none';
 	}
 
 	self.drawSplash = function(){

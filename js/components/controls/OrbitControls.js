@@ -283,6 +283,7 @@ THREE.OrbitControls = function ( object, domElement ) {
 	}
 
 	this.rotUp = function(ang){
+		console.log(sphericalDelta.phi);
 		rotateUp(ang);
 		scope.update();
 	}

@@ -1,4 +1,3 @@
-//StateManager.drawSplash();
 function loadTextFile(url, callback) {
   var request = new XMLHttpRequest();
   request.open('POST', url, true);

@@ -6,7 +6,6 @@ function onWindowResize() {
 }
 
 function onMouseWheel(event){
-	console.log(event);
 	controls.rotate(0.001 * event.deltaY);
 }
 
@@ -16,7 +15,6 @@ function onMouseMove( event ) {
   $('.menu').removeClass("short");
 	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
 	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
- console.log(event);
     controls.rotUp(Math.sin(mouse.y /200) * -1);
 
     // exp
@@ -39,14 +37,10 @@ function onMouseMove( event ) {
 }
 
 function onTouchEnd(event){
-  console.log('t end');
   onTouchStart(event);
 }
 
 function onTouchStart(event){
-  console.log(event);
-  console.log(raycaster);
-
   if(event.targetTouches){
 
 	}else{
@@ -73,10 +67,7 @@ function onTouchStart(event){
   }
 }
 
-function onDocumentMouseDown( event ) {
-    console.log(event);
-    console.log(raycaster);
-
+function onDocumentMouseDown( event ) { 
     event.preventDefault();
 
     mouse.x = ( event.clientX / renderer.domElement.clientWidth ) * 2 - 1;

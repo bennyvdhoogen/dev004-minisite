@@ -16,29 +16,23 @@ var SoundManager = (function () {
 
   self.playTrackByName = function(songName){
     var songName = songName.replace("invis_", "");
-    var songIndex = 0;
-    debugger;
+    var songIndex = null;
     self.songs.forEach(function(item, key){
         if(item.name == songName){
           songIndex = key;
         }
     });
 
-    self.playTrack(songIndex);
-    debugger;
+    songIndex && self.playTrack(songIndex);
   }
-
 
   self.attachSCPlayer = function(){
     self.soundcloudPlayer = window.SC.Widget('soundcloud-player');
-    debugger;
   }
 
   self.playTrack = function(trackNumber){
       var player = self.soundcloudPlayer;
-
-      player.isPlay
-      alert('playTrack');
+			
       if(trackNumber){
       //  player.pause();
         player.skip(trackNumber);
