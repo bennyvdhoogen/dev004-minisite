@@ -7,7 +7,7 @@
         <div class="row">
           <div class="centered-information">
             <div class="title-block">
-              <img src="assets/svg/cover_invert_1.svg" height="350">
+              <img src="assets/svg/cover_invert_1.svg" width="100%">
             </div>
             <div class="continue-block">
               <button onclick="goToState(2);"> LISTEN </button>

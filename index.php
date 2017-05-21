@@ -41,7 +41,7 @@
       <button onclick="StateManager.setCurrentState(1);"> INFO </button>
     </div>
     <iframe width="100%" height="450"  style="visibility:hidden; position:fixed; top:-50000px; left:-30000; display: none; z-index:-1;" scrolling="no" frameborder="no" id="soundcloud-player"
-            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/304658516&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false">
+            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/304658516&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_artwork=false&amp;single_active=true&amp;show_user=true&amp;show_reposts=false">
     </iframe>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
     <script src="https://connect.soundcloud.com/sdk/sdk-3.1.2.js"></script>
