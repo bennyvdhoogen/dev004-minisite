@@ -52,11 +52,9 @@ window.addEventListener( 'deviceorientation', function(event){
 	       dae.updateMatrix();
 	       dae.position.set(0,-15,0);
 				 statusObj = {};
-				 statusObj.stateId = 1;
+				 statusObj.stateId = 0;
 				 var evtStateReady = new CustomEvent('statestatus', { 'detail': statusObj});
 				 window.dispatchEvent(evtStateReady);
-	  //     init();
-	  //     animate();
 	     });
 	   });
 	 });

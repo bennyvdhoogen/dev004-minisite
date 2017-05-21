@@ -7,10 +7,10 @@
         <div class="row">
           <div class="centered-information">
             <div class="title-block">
-              <h1> VOID, SEPARATION AND WAITING</h1>
+              <img src="assets/svg/cover_invert_1.svg" height="350">
             </div>
             <div class="continue-block">
-              <button onclick="goToState(2);"> CONTINUE </button>
+              <button onclick="goToState(2);"> LISTEN </button>
             </div>
             <div class="continue-block">
               <button onclick="goToState(3);"> DOWNLOAD </button>

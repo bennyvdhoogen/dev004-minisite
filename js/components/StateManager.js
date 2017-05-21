@@ -1,6 +1,7 @@
 var StateManager = (function () {
 	var self = {};
 
+	// state IDs should not be modified, add new ones instead.
 	self.states = [
 		{
 			id: 0,
@@ -8,20 +9,25 @@ var StateManager = (function () {
 			ready: false,
 			init: function(){
 				// only run once
+				if(this.ready){
 					window.init();
 					console.log('Loaded : 1 / 4');
 					window.render();
 					console.log('Loaded : 2 / 4');
 					window.animate();
 					console.log('Loaded : 3 / 4');
-					window.scene.add( dae );
+					 window.scene.add( dae );
 					console.log('Loaded : 4 / 4');
-					self.updateState({id: 0, ready: true});
+					self.updateState({id: 1, ready: true});
 					self.setCurrentState(1);
+				}
 				//
 			},
 			destroy: function(){
 				//
+				var loaderScreen = document.getElementById('loader-screen');
+				loaderScreen.style.display = 'none';
+
 			}
 		},
     {
@@ -67,10 +73,14 @@ var StateManager = (function () {
 	}
 
 	self.updateState = function(obj){
-		if(obj.id){
+		if(obj.id > -1){
 			if(self.states[obj.id]){
 				for(key in obj){
 					self.states[obj.id][key] = obj[key];
+				}
+				// if state is now ready, call init()
+				if(self.states[obj.id].ready){
+					self.states[obj.id].init();
 				}
 			}
 		}
