@@ -60,14 +60,14 @@ function onTouchStart(event){
     if(mesh.name == 'Cylinder'){
       moveToDownloadPage();
     }
-    console.log(intersects[0].object.parent)
+  //  console.log(intersects[0].object.parent)
   //  alert(mesh.name);
     SoundManager.playTrackByName(mesh.name);
 
   }
 }
 
-function onDocumentMouseDown( event ) { 
+function onDocumentMouseDown( event ) {
     event.preventDefault();
 
     mouse.x = ( event.clientX / renderer.domElement.clientWidth ) * 2 - 1;
@@ -83,7 +83,7 @@ function onDocumentMouseDown( event ) {
       if(mesh.name == 'Cylinder'){
         moveToDownloadPage();
       }
-      console.log(intersects[0].object.parent)
+    //  console.log(intersects[0].object.parent)
     //  alert(mesh.name);
       SoundManager.playTrackByName(mesh.name);
 

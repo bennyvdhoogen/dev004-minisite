@@ -4,14 +4,15 @@ var SoundManager = (function () {
   self.status = 'idle'; //
   self.isMuted = false;
   self.soundcloudPlayer;
+	self.currentPlayingIndex = null;
 
   self.songs = [
-       {"name": "money", "src":"assets/snd/one.mp3"},
-       {"name": "arab", "src":"assets/snd/two.mp3"},
-       {"name": "sphlash", "src":"assets/snd/three.mp3"},
-       {"name": "smile", "src":"assets/snd/four.mp3"},
-       {"name": "slime", "src":"assets/snd/four.mp3"},
-       {"name": "hand", "src":"assets/snd/five.mp3"}
+       {"name": "money", "index": 0},
+       {"name": "arab", "index": 1},
+       {"name": "sphlash", "index": 2},
+       {"name": "smile", "index": 3},
+       {"name": "slime", "index": 4},
+       {"name": "hand", "index": 5}
   ];
 
   self.playTrackByName = function(songName){
@@ -26,17 +27,29 @@ var SoundManager = (function () {
     songIndex && self.playTrack(songIndex);
   }
 
+	self.displayTrackName = function(){
+		var elem = document.getElementById("track-information");
+		elem.classList = 'track-information active';
+		var trackTitle = self.songs[self.currentPlayingIndex].name;
+		elem.innerHTML = trackTitle;
+	}
+
   self.attachSCPlayer = function(){
     self.soundcloudPlayer = window.SC.Widget('soundcloud-player');
+		self.soundcloudPlayer.bind(SC.Widget.Events.PAUSE, function(event){
+			console.log(event);
+		});
   }
 
   self.playTrack = function(trackNumber){
       var player = self.soundcloudPlayer;
-			
+
       if(trackNumber){
-      //  player.pause();
-        player.skip(trackNumber);
-        player.play();
+				if(trackNumber != self.currentPlayingIndex){
+						self.currentPlayingIndex = trackNumber;
+						player.skip(trackNumber);
+						self.displayTrackName();
+				}
       }
   }
 

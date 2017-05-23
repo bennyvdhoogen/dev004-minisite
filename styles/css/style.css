@@ -33,6 +33,24 @@ body {
   border: none;
   border: 1px solid black; }
 
+.track-information {
+  transition: height 0.3s ease;
+  height: 0px;
+  position: absolute;
+  z-index: 5;
+  overflow: hidden;
+  width: 205px;
+  font-size: 12px;
+  font-weight: 200;
+  top: 56px;
+  padding: 2px 6px 2px 6px;
+  color: white;
+  left: 25px;
+  background-color: black;
+  border: none; }
+  .track-information.active {
+    height: 23px; }
+
 #splash-information-panel {
   box-shadow: -3px 6px 19px 0px rgba(0, 0, 0, 0.1);
   height: 100vh;
