@@ -1,4 +1,5 @@
 @import 'mixins/mediaqueries';
+$menu-nav-width: 198px;
 
 html {
   overflow: hidden;
@@ -47,7 +48,7 @@ body {
   position: absolute;
   z-index: 5;
   overflow: hidden;
-  width: 205px;
+  width: $menu-nav-width;
   font-size: 12px;
   font-weight: 200;
   top: 56px;
@@ -182,7 +183,7 @@ body {
   color: black;
   background-color: white;
   border: 1px solid black;
-  width: 205px;
+  width: $menu-nav-width;
   height: 31px;
   &:hover {
     width: 575px;
@@ -196,6 +197,7 @@ body {
   }
   li {
     &:first-child {
+      padding-right: 0px;
       &:hover {
         /*  color:white;
           background-color:black; */
@@ -206,6 +208,7 @@ body {
       font-weight: 300;
       margin-left: -10px;
       border-right: 1px solid black;
+      padding-left: 15px;
       /*  color: white;
         background-color: #000; */
     }
