@@ -3,6 +3,7 @@ var SoundManager = (function () {
   // idle, playing, muted
   self.status = 'idle'; //
   self.isMuted = false;
+	self.isPaused = false;
   self.soundcloudPlayer;
 	self.currentPlayingIndex = null;
 
@@ -37,12 +38,25 @@ var SoundManager = (function () {
   self.attachSCPlayer = function(){
     self.soundcloudPlayer = window.SC.Widget('soundcloud-player');
 		self.soundcloudPlayer.bind(SC.Widget.Events.PAUSE, function(event){
-			console.log(event);
+			//
+		});
+		self.soundcloudPlayer.bind(SC.Widget.Events.PLAY, function(event){
+			//
+		});
+		self.soundcloudPlayer.bind(SC.Widget.Events.FINISH, function(event){
+			// stop playback on track finish
+			self.soundcloudPlayer.pause();
+			self.isPaused = true;
 		});
   }
 
   self.playTrack = function(trackNumber){
       var player = self.soundcloudPlayer;
+
+			if(self.isPaused == true){
+				player.skip(trackNumber);
+				self.isPaused = !self.isPaused;
+			}
 
       if(trackNumber){
 				if(trackNumber != self.currentPlayingIndex){
