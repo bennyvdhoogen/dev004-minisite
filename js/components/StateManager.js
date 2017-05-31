@@ -46,10 +46,12 @@ var StateManager = (function () {
 			name:"scene",
 			ready: false,
 			init: function(){
+				attachIOEventListeners();
 				//
 			},
 			destroy: function(){
 				//
+				detachIOEventListeners();
 			}
 		},
 		{

@@ -77,10 +77,6 @@ function init() {
   }
 
   window.addEventListener( 'resize', onWindowResize, false );
-  window.addEventListener( 'mousedown', onDocumentMouseDown, false );
-  window.addEventListener( 'touchstart', onTouchStart, false );
-  window.addEventListener( 'touchend', onTouchEnd, false );
-  window.addEventListener( 'mousemove', onMouseMove, false );
-	window.addEventListener( 'mousewheel', onMouseWheel, false );
+
 
 }

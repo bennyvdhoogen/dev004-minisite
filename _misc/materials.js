@@ -205,5 +205,3 @@
 				renderer.render( scene, camera );
 
 			}
-
-		

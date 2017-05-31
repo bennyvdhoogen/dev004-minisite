@@ -48,6 +48,10 @@ body {
   left: 25px;
   background-color: black;
   border: none; }
+  @media (max-width: 480px) {
+    .track-information {
+      top: 31px;
+      left: 0px; } }
   .track-information.active {
     height: 23px; }
 
@@ -285,7 +289,7 @@ body {
 
   .menu-wrapper {
     position: absolute;
-    z-index: 2;
+    z-index: 10;
     top: 0px;
     left: 0px; }
 

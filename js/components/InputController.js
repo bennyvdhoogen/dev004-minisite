@@ -1,3 +1,18 @@
+function attachIOEventListeners(){
+  window.addEventListener( 'mousedown', onDocumentMouseDown, false );
+  window.addEventListener( 'touchstart', onTouchStart, false );
+  window.addEventListener( 'touchend', onTouchEnd, false );
+  window.addEventListener( 'mousemove', onMouseMove, false );
+	window.addEventListener( 'mousewheel', onMouseWheel, false );
+}
+
+function detachIOEventListeners(){
+  window.removeEventListener( 'mousedown', onDocumentMouseDown, false );
+  window.removeEventListener( 'touchstart', onTouchStart, false );
+  window.removeEventListener( 'touchend', onTouchEnd, false );
+  window.removeEventListener( 'mousemove', onMouseMove, false );
+	window.removeEventListener( 'mousewheel', onMouseWheel, false );
+}
 
 function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
@@ -37,10 +52,12 @@ function onMouseMove( event ) {
 }
 
 function onTouchEnd(event){
+  console.log(event);
   onTouchStart(event);
 }
 
 function onTouchStart(event){
+  console.log(event);
   if(event.targetTouches){
 
 	}else{
