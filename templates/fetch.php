@@ -8,7 +8,7 @@
 <div id="fetch-page" style="display:none;">
   <div class="centered-information">
     <div class="title-block">
-      <h1> VOID, SEPARATION AND WAITING</h1>
+      <h1>VOID, SEPARATION AND WAITING</h1>
     </div>
     <div class="continue-block">
       <a href="<?= $buttons['download']['url'] ?>" target="_blank" class="btn btn-outline"> <?= $buttons['download']['txt'] ?></a>

@@ -12,6 +12,7 @@
       <meta property="og:url" content="<?= $meta['url']; ?>">
       <link rel="stylesheet" type="text/css" href="styles/css/style.css" media="screen" />
       <link rel="stylesheet" type="text/css" href="styles/css/bootstrap.min.css"/>
+      <link href="https://fonts.googleapis.com/css?family=Roboto:300,500" rel="stylesheet"> 
   </head>
   <body>
     <header>
