@@ -19,7 +19,8 @@ window.addEventListener( 'deviceorientation', function(event){
 	 var fragmentShader;
 
 	 loader.options.convertUpAxis = true;
-	 loader.load( 'assets/meshes/scene100-red.dae', function ( collada ) {
+	 loader.load( 'assets/meshes/scene105.dae', function ( collada ) {
+		 debugger;
 	   loadTextFile('assets/shaders/vertexShader.glsl', function(vxShader){
 	     vertexShader = vxShader;
 	     loadTextFile('assets/shaders/fragmentShader.glsl', function(fragShader){
@@ -36,7 +37,14 @@ window.addEventListener( 'deviceorientation', function(event){
 	 						});
 	 				}else{
 	 					item.children.forEach(function(mesh){
-	 							mesh.children[0].children[0].material = symbolMeshMaterial;
+							debugger;
+							console.log(mesh.children[0]);
+							console.log(mesh.children[0].children[0]);
+							if(mesh.children[0]){
+								if(mesh.children[0].children[0]){
+										mesh.children[0].children[0].material = symbolMeshMaterial;
+								}
+							}
 	 					});
 	 				}
 
