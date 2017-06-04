@@ -79,10 +79,13 @@ body {
       color: white; }
 
 #fetch-page .title-block {
-  margin-top: 100px; }
+  margin-top: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
   #fetch-page .title-block img {
     box-shadow: -3px 6px 5px 0px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
+    max-width: 350px;
     margin-bottom: 25px; }
 
 #splash-information-panel {
