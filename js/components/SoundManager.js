@@ -38,6 +38,12 @@ var SoundManager = (function () {
 
   self.attachSCPlayer = function(){
     self.soundcloudPlayer = window.SC.Widget('soundcloud-player');
+		self.soundcloudPlayer.getSounds(function(sounds){
+			console.log(sounds);
+			sounds.forEach(function(sound, index){
+					self.songs[index].displayName = sound.title;
+			});
+		});
 		self.soundcloudPlayer.bind(SC.Widget.Events.PAUSE, function(event){
 			//
 		});
