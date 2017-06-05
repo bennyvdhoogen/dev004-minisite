@@ -29,8 +29,9 @@ var SoundManager = (function () {
   }
 
 	self.displayTrackName = function(){
-		var elem = document.getElementById("track-information");
-		elem.classList = 'track-information active';
+		var elemWrapper = document.getElementById("track-information");
+		elemWrapper.classList = 'track-information active';
+		var elem = document.getElementById("track-info-text"); 
 		var trackTitle = self.songs[self.currentPlayingIndex].name;
 		elem.innerHTML = trackTitle;
 	}

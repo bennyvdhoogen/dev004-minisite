@@ -49,12 +49,17 @@ body {
   left: 25px;
   background-color: black;
   border: none; }
+  .track-information #actions {
+    opacity: 0;
+    margin-top: -17px; }
   @media (max-width: 480px) {
     .track-information {
       top: 31px;
       left: 0px; } }
   .track-information.active {
     height: 23px; }
+    .track-information.active #actions {
+      opacity: 1; }
 
 .continue-block {
   display: flex;
@@ -219,6 +224,9 @@ body {
 .float-left {
   float: left; }
 
+.float-right {
+  float: right; }
+
 .m-2 {
   margin: 2px; }
 
@@ -241,8 +249,8 @@ body {
   border: none;
   background-color: transparent;
   background-repeat: no-repeat;
-  width: 25px;
-  height: 25px; }
+  width: 20px;
+  height: 20px; }
   .mute-btn:focus {
     outline: 0; }
 
