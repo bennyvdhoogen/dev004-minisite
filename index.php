@@ -36,7 +36,7 @@
     <?php include 'templates/splash.php' ?>
     <?php include 'templates/loader.php' ?>
     <div class="information-button">
-      <button onclick="StateManager.setCurrentState(1);"> INFO </button>
+      <button onclick="goToState(1);"> INFO </button>
     </div>
     <div id="track-information" class="track-information">
       <div id="track-info-text">
