@@ -29,7 +29,8 @@ window.addEventListener( 'deviceorientation', function(event){
 	       dae = collada.scene;
 	 			var invisMaterial = new THREE.MeshNormalMaterial( ) ; //3
 	 			var invisMaterial = new THREE.MeshPhongMaterial( { color: 0xdddddd, shininess: 10, shading: THREE.SmoothShading, opacity: 0.5, transparent: true } );
-	 			var symbolMeshMaterial = new THREE.MeshNormalMaterial();
+				var symbolMeshMaterial = new THREE.MeshLambertMaterial( { color: 0x0, emissive: 0x282828, shininess: 100, transparent: true, opacity: 1} );
+
 	 			dae.children.forEach(function(item){
 	 				if(item.name.indexOf('invis_') != -1){
 	 						item.children.forEach(function(mesh){
