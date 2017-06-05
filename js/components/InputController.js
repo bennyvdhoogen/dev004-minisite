@@ -96,7 +96,9 @@ function onDocumentMouseDown( event ) {
 
     if ( intersects.length > 0 ) {
     //  alert(mesh.name);
+
       var mesh  = intersects[0].object.parent;
+      console.log(mesh);
       if(mesh.name == 'Cylinder'){
         moveToDownloadPage();
       }

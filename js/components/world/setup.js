@@ -18,9 +18,10 @@ window.addEventListener( 'deviceorientation', function(event){
 	 var vertexShader;
 	 var fragmentShader;
 
+	 var initialObjectRotations = {};
+
 	 loader.options.convertUpAxis = true;
-	 loader.load( 'assets/meshes/scene105.dae', function ( collada ) {
-		 debugger;
+	 loader.load( 'assets/meshes/scene106.dae', function ( collada ) {
 	   loadTextFile('assets/shaders/vertexShader.glsl', function(vxShader){
 	     vertexShader = vxShader;
 	     loadTextFile('assets/shaders/fragmentShader.glsl', function(fragShader){
@@ -36,13 +37,17 @@ window.addEventListener( 'deviceorientation', function(event){
 	 								mesh.material.visible = false;
 	 						});
 	 				}else{
+						item.children[0].material = symbolMeshMaterial;
 	 					item.children.forEach(function(mesh){
-							debugger;
-							console.log(mesh.children[0]);
-							console.log(mesh.children[0].children[0]);
-							if(mesh.children[0]){
-								if(mesh.children[0].children[0]){
-										mesh.children[0].children[0].material = symbolMeshMaterial;
+
+							if(mesh.children[0]){ 
+								mesh.material = symbolMeshMaterial;
+								if(mesh.children[0]){
+									var innerMesh = mesh.children[0];
+									innerMesh.children.forEach(function(item){
+											initialObjectRotations[item.name] = item.rotation;
+									});
+									innerMesh.material = symbolMeshMaterial;
 								}
 							}
 	 					});
