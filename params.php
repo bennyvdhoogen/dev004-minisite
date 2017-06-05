@@ -11,8 +11,7 @@
 		"catalog" => "DEV004",
 		"artist" => "ghost kwini",
 		"release" => "void, separation and waiting"
-	];
-
+	]; 
 
 	$svg = [
 		"yt" => "svg/yt.svg",
