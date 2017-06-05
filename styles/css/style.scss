@@ -40,6 +40,11 @@ body {
     background-color: white;
     border: none;
     border: 1px solid black;
+    @include mobile-only{
+      right:0px;
+      bottom:40px;
+      transform: rotate(-90deg);
+    }
   }
 }
 
@@ -111,10 +116,16 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    @include mobile-only{
+      margin-top:25px;
+    }
     img{
       box-shadow: -3px 6px 5px 0px rgba(0, 0, 0, 0.1);
       max-width: 350px;
       margin-bottom:25px;
+      @include mobile-only{
+        max-width: 191px;
+      }
     }
   }
 }
@@ -141,6 +152,13 @@ body {
       @include mobile-only{
         margin-top: -50px;
         font-size: 40px;
+      }
+    }
+
+    img{
+      @include mobile-only{
+        margin-top: -20px;;
+        max-width: 191px;
       }
     }
   }
