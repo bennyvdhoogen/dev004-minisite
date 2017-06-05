@@ -15,7 +15,7 @@ function detachIOEventListeners(){
 }
 
 function onWindowResize() {
-  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.aspect = window.innerWidth / window.innerHeight; 
   camera.updateProjectionMatrix();
   renderer.setSize( window.innerWidth, window.innerHeight );
 }
@@ -40,12 +40,17 @@ function onMouseMove( event ) {
     document.body.style.cursor = 'default';
 
     if ( intersects.length > 0 ) {
-
       var mesh  = intersects[0].object.parent;
+      window.lastMesh = mesh;
+      WiggleMeshIn(mesh);
     //  mesh.rotateY(0.1);
       document.body.style.cursor = 'pointer';
 
+    }else{
+      if(window.lastMesh){
+        WiggleMeshOut(window.lastMesh);
       }
+    }
 
 
 
@@ -55,6 +60,7 @@ function onTouchEnd(event){
   console.log(event);
   onTouchStart(event);
 }
+
 
 function onTouchStart(event){
   console.log(event);

@@ -77,6 +77,6 @@ function init() {
   }
 
   window.addEventListener( 'resize', onWindowResize, false );
-
+  console.log(scene);
 
 }

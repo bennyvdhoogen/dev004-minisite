@@ -33,3 +33,94 @@ function render() {
   THREE.AnimationHandler.update( clock.getDelta() );
   renderer.render( scene, camera );
 }
+
+function getInitialRotationForObjects(){
+  console.log(scene);
+  window.initialObjectRotations = {};
+  window.SoundManager.songs.forEach(function(item){
+    var mesh = window.scene.getObjectByName(item.name);
+    if(mesh){
+        window.initialObjectRotations[item.name] = mesh.rotation;
+    }
+  });
+}
+
+function getMeshByTarget(mesh){
+  meshName = mesh.name;
+  meshName = meshName.replace("invis_", "");
+  mesh = scene.getObjectByName(meshName);
+  return mesh;
+}
+
+function WiggleMeshIn(mesh){
+  //debugger;
+  // find the actual mesh
+  actualMesh = getMeshByTarget(mesh);
+  meshName = actualMesh.name;
+//  mesh.rotateX(-0.005);
+  if(actualMesh.isAnimating != 'in'){
+  //    animateRotation(meshName,0, window.initialObjectRotations[meshName].y, actualMesh.rotation.y + 0.5, 200, 'in');
+  //  animateMethod(meshName,'rotateY',0, 0, 0.005, 200, 'in');
+    animateScale(meshName, 0, 1, 1.25, 250, 'in');
+  }
+  console.log(mesh);
+}
+
+function animateRotation(meshName,unit,from,to,time, status) {
+    elem = scene.getObjectByName(meshName);
+    if(!elem) return;
+    var start = new Date().getTime(),
+        timer = setInterval(function() {
+            var step = Math.min(1,(new Date().getTime()-start)/time);
+            elem['rotation']['y'] = (from+step*(to-from))+unit;
+            if( step == 1){ clearInterval(timer); elem.isAnimating = status;}
+        },25);
+    elem.isAnimating = status;
+    console.log(elem.isAnimating);
+    elem['rotation']['x'] = from+unit;
+}
+
+function animateScale(meshName,unit,from,to,time, status) {
+    elem = scene.getObjectByName(meshName);
+    if(!elem) return;
+    var start = new Date().getTime(),
+        timer = setInterval(function() {
+            var step = Math.min(1,(new Date().getTime()-start)/time);
+            elem['scale']['x'] = (from+step*(to-from))+unit;
+            elem['scale']['y'] = (from+step*(to-from))+unit;
+            elem['scale']['z'] = (from+step*(to-from))+unit;
+            if( step == 1){ clearInterval(timer); elem.isAnimating = status;}
+        },25);
+    elem.isAnimating = status;
+    console.log(elem.isAnimating);
+    elem['scale']['x'] = from+unit;
+    elem['scale']['y'] = from+unit;
+    elem['scale']['z'] = from+unit;
+}
+
+function animateMethod(meshName,method,unit,from,to,time,status) {
+    elem = scene.getObjectByName(meshName);
+    if(!elem) return;
+    var start = new Date().getTime(),
+        timer = setInterval(function() {
+            var step = Math.min(1,(new Date().getTime()-start)/time);
+            elem[method]((from+step*(to-from))+unit);
+            if( step == 1){ clearInterval(timer); elem.isAnimating = status;}
+        },25);
+    elem[method](from+unit);
+}
+
+function WiggleMeshOut(mesh){
+//  debugger;
+  actualMesh = getMeshByTarget(mesh);
+  meshName = actualMesh.name;
+
+//  mesh.rotateX(-0.005);
+  if(actualMesh.isAnimating != 'out'){
+    //  animateRotation(meshName,0, actualMesh.rotation.y, window.initialObjectRotations[meshName].y, 200, 'out');
+  //  animateMethod(meshName,'rotateY',0, 0, -0.005, 200, 'out');
+    animateScale(meshName, 0, 1.25, 1, 250, 'out');
+  }
+    console.log(actualMesh.rotation.x);
+  //
+}

@@ -40,7 +40,7 @@ window.addEventListener( 'deviceorientation', function(event){
 						item.children[0].material = symbolMeshMaterial;
 	 					item.children.forEach(function(mesh){
 
-							if(mesh.children[0]){ 
+							if(mesh.children[0]){
 								mesh.material = symbolMeshMaterial;
 								if(mesh.children[0]){
 									var innerMesh = mesh.children[0];

@@ -35,6 +35,7 @@ var StateManager = (function () {
 			name:"splash",
 			ready: false,
 			init: function(){
+				getInitialRotationForObjects();
 				self.drawSplash();
 			},
 			destroy: function(){
