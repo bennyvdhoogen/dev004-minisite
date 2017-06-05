@@ -32,6 +32,9 @@ function onMouseMove( event ) {
 	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
     controls.rotUp(Math.sin(mouse.y /200) * -1);
 
+    var infoElem = document.getElementById('hover-track-info');
+    infoElem.innerHTML = '';
+
     // exp
 
     raycaster.setFromCamera( mouse, camera );
@@ -43,6 +46,7 @@ function onMouseMove( event ) {
 
       var mesh  = intersects[0].object.parent;
     //  mesh.rotateY(0.1);
+      infoElem.innerHTML = mesh.name;
       document.body.style.cursor = 'pointer';
 
       }

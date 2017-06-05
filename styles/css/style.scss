@@ -31,6 +31,15 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+.hover-track-information{
+  bottom: 15%;
+  width: 100%;
+  font-family: 'Roboto', sans-serif;
+  /* margin: auto; */
+  text-align: center;
+  position: fixed;
+}
+
 .information-button{
   button{
     position:absolute;

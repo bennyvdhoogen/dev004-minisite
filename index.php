@@ -38,9 +38,11 @@
     <div class="information-button">
       <button onclick="StateManager.setCurrentState(1);"> INFO </button>
     </div>
+    <div id="hover-track-info" class="hover-track-information">
+      reflections
+    </div>
     <div id="track-information" class="track-information">
       <div id="track-info-text">
-
       </div>
       <div id="actions" class="float-right hidden-xs">
         <button id="mute-btn" onclick="mutePlayer();" class="mute-btn mute-btn-unmuted"></button>

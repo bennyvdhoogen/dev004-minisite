@@ -52,6 +52,8 @@ var StateManager = (function () {
 			destroy: function(){
 				//
 				detachIOEventListeners();
+				var infoElem = document.getElementById('hover-track-info');
+	      infoElem.innerHTML = '';
 			}
 		},
 		{

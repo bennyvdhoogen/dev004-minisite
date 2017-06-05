@@ -28,8 +28,34 @@ THREE.DeviceOrientationControls = function( object ) {
 
 	var onScreenOrientationChangeEvent = function() {
 		scope.screenOrientation = window.orientation || 0;
+		this.LookingAtCheck();
 
 	};
+
+	this.LookingAtCheck = function(){
+		middleX= (window.innerWidth  /2 ) * 2 - 1;
+		middleY = -( window.innerHeight /) * 2 + 1;
+
+	    var infoElem = document.getElementById('hover-track-info');
+	    infoElem.innerHTML = '';
+
+	    // exp
+
+	    raycaster.setFromCamera( mouse, camera );
+
+	    var intersects = raycaster.intersectObjects( scene.children[1].children, true);
+	    document.body.style.cursor = 'default';
+
+	    if ( intersects.length > 0 ) {
+
+	      var mesh  = intersects[0].object.parent;
+	    //  mesh.rotateY(0.1);
+	      infoElem.innerHTML = mesh.name;
+	      document.body.style.cursor = 'pointer';
+
+	      }
+
+	}
 
 	// The angles alpha, beta and gamma form a set of intrinsic Tait-Bryan angles of type Z-X'-Y''
 
