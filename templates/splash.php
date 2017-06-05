@@ -6,9 +6,9 @@
       <div id="splash-information-panel" class="col-xs-12 col-md-4 col-sm-6" style="height:100vh; background-color: white;">
         <div class="row">
           <div class="centered-information">
-            <div class="title-block"> 
+            <div class="title-block">
               <a href="<?= $buttons['download']['url']?>" target="blank">
-                <img src="assets/svg/cover_invert_1.svg" width="300px"><
+                <img src="assets/svg/cover_invert_1.svg" width="300px">
               </a>
             </div>
             <div class="continue-block">
