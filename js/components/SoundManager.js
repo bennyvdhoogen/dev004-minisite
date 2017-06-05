@@ -41,7 +41,11 @@ var SoundManager = (function () {
 		self.soundcloudPlayer.getSounds(function(sounds){
 			console.log(sounds);
 			sounds.forEach(function(sound, index){
-					self.songs[index].displayName = sound.title;
+				if(sound.title){
+					if(self.songs[index]){  
+						self.songs[index].displayName = sound.title;
+					}
+				}
 			});
 		});
 		self.soundcloudPlayer.bind(SC.Widget.Events.PAUSE, function(event){
