@@ -17,6 +17,7 @@ function render() {
   var timer = Date.now() * 0.0005;
   radious = 1;
   camera.updateMatrix();
+  cubeCamera.updateCubeMap( renderer, scene );
 
   // update the picking ray with the camera and mouse position
 	raycaster.setFromCamera( mouse, camera );

@@ -19,6 +19,9 @@ function init() {
   var line = new THREE.LineSegments( geometry, material );
   //scene.add( line );
 
+  //Create cube camera
+  scene.add( cubeCamera );
+
   // Textures
   var textureLoader = new THREE.TextureLoader();
 
@@ -44,6 +47,9 @@ function init() {
 
   sphere.position = new THREE.Vector3(0, 0, -299);
   scene.add(sphere);
+
+  var light = new THREE.AmbientLight( 0xffffff ); // soft white light
+  scene.add( light );
 
   // add the c4d ssets
   //scene.add( dae );
