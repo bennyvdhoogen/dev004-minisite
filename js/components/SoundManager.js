@@ -7,36 +7,43 @@ var SoundManager = (function () {
   self.soundcloudPlayer;
 	self.currentPlayingIndex = null;
 
+	// maps the name of the meshes, the soundcloud widget track index and the track display title together.
   self.songs = [
-       {"name": "money", "index": 0},
-       {"name": "arab", "index": 1},
-       {"name": "sphlash", "index": 2},
-       {"name": "smile", "index": 3},
-       {"name": "slime", "index": 4},
-       {"name": "hand", "index": 5}
+       {"name": "money", "displayName" : "Money", "index": 0},
+       {"name": "arab", "displayName" : "Arab", "index": 1},
+       {"name": "sphlash", "displayName" : "Sphlash", "index": 2},
+       {"name": "smile", "displayName" : "Smile", "index": 3},
+       {"name": "slime", "displayName" : "Slime", "index": 4},
+       {"name": "hand", "displayName" : "Hand", "index": 5}
   ];
 
   self.playTrackByName = function(songName){
     var songName = songName.replace("invis_", "");
-    var songIndex = null;
+    var songIndex = undefined;
     self.songs.forEach(function(item, key){
         if(item.name == songName){
           songIndex = key;
         }
     });
-
-    songIndex && self.playTrack(songIndex);
+    songIndex !== undefined && self.playTrack(songIndex);
   }
 
 	self.displayTrackName = function(){
-		var elem = document.getElementById("track-information");
-		elem.classList = 'track-information active';
-		var trackTitle = self.songs[self.currentPlayingIndex].name;
+		var elemWrapper = document.getElementById("track-information");
+		elemWrapper.classList = 'track-information active';
+		var elem = document.getElementById("track-info-text");
+		var trackTitle = self.songs[self.currentPlayingIndex].displayName;
 		elem.innerHTML = trackTitle;
 	}
 
   self.attachSCPlayer = function(){
     self.soundcloudPlayer = window.SC.Widget('soundcloud-player');
+		self.soundcloudPlayer.getSounds(function(sounds){
+			console.log(sounds);
+			sounds.forEach(function(sound, index){
+					self.songs[index].displayName = sound.title;
+			});
+		});
 		self.soundcloudPlayer.bind(SC.Widget.Events.PAUSE, function(event){
 			//
 		});
@@ -58,7 +65,7 @@ var SoundManager = (function () {
 				self.isPaused = !self.isPaused;
 			}
 
-      if(trackNumber){
+      if(trackNumber != undefined){
 				if(trackNumber != self.currentPlayingIndex){
 						self.currentPlayingIndex = trackNumber;
 						player.skip(trackNumber);

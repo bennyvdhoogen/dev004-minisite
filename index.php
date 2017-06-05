@@ -12,7 +12,7 @@
       <meta property="og:url" content="<?= $meta['url']; ?>">
       <link rel="stylesheet" type="text/css" href="styles/css/style.css" media="screen" />
       <link rel="stylesheet" type="text/css" href="styles/css/bootstrap.min.css"/>
-      <link href="https://fonts.googleapis.com/css?family=Roboto:300,500" rel="stylesheet"> 
+      <link href="https://fonts.googleapis.com/css?family=Roboto:300,500" rel="stylesheet">
   </head>
   <body>
     <header>
@@ -29,10 +29,7 @@
               ?>
           </ul>
         </div>
-        <div class="float-left m-6 hidden-xs">
-          <button id="mute-btn" onclick="mutePlayer();" class="mute-btn mute-btn-unmuted"></button>
-          <div id="mute-btn-muted" class="mute-btn mute-btn-muted hidden"></div>
-        </div>
+
       </div>
     </header>
     <?php include 'templates/fetch.php' ?>
@@ -42,6 +39,13 @@
       <button onclick="StateManager.setCurrentState(1);"> INFO </button>
     </div>
     <div id="track-information" class="track-information">
+      <div id="track-info-text">
+
+      </div>
+      <div id="actions" class="float-right hidden-xs">
+        <button id="mute-btn" onclick="mutePlayer();" class="mute-btn mute-btn-unmuted"></button>
+        <div id="mute-btn-muted" class="mute-btn mute-btn-muted hidden"></div>
+      </div>
     </div>
     <iframe width="100%" height="450"  style="visibility:hidden; position:fixed; top:-50000px; left:-30000; z-index:-1;" scrolling="no" frameborder="no" id="soundcloud-player"
             src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/304658516&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_artwork=false&amp;single_active=true&amp;show_user=true&amp;show_reposts=false">

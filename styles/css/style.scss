@@ -40,6 +40,11 @@ body {
     background-color: white;
     border: none;
     border: 1px solid black;
+    @include mobile-only{
+      right:0px;
+      bottom:40px;
+      transform: rotate(-90deg);
+    }
   }
 }
 
@@ -59,6 +64,11 @@ body {
   background-color: black;
   border: none;
 
+  #actions{
+    opacity: 0;
+    margin-top:-17px;
+  }
+
   @include mobile-only{
     top: 31px;
     left: 0px;
@@ -66,6 +76,57 @@ body {
 
   &.active{
     height: 23px;
+
+    #actions{
+      opacity:1;
+    }
+  }
+}
+
+.continue-block{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+
+  button, a{
+    text-decoration: none;
+    background-color: transparent;
+    width: 80%;
+    padding: 12px;
+    border: none;
+    color: rgba(0, 0, 0, 0.8);
+    margin: 0px 35px 35px 35px;
+    font-family: "Roboto";
+    font-weight: 300;
+    border: 1px solid black;
+    &:focus{
+      outline:none;
+    }
+    &:hover{
+      text-decoration: none;
+      background-color:black;
+      color:white;
+    }
+  }
+}
+
+#fetch-page{
+  .title-block{
+    margin-top:100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include mobile-only{
+      margin-top:25px;
+    }
+    img{
+      box-shadow: -3px 6px 5px 0px rgba(0, 0, 0, 0.1);
+      max-width: 350px;
+      margin-bottom:25px;
+      @include mobile-only{
+        max-width: 191px;
+      }
+    }
   }
 }
 
@@ -93,27 +154,11 @@ body {
         font-size: 40px;
       }
     }
-  }
-  .continue-block{
-    display: flex;
-    justify-content: center;
 
-    button{
-      background-color: transparent;
-      width: 80%;
-      padding: 12px;
-      border: none;
-      color: rgba(0, 0, 0, 0.8);
-      margin: 0px 35px 35px 35px;
-      font-family: "Roboto";
-      font-weight: 300;
-      border: 1px solid black;
-      &:focus{
-        outline:none;
-      }
-      &:hover{
-        background-color:black;
-        color:white;
+    img{
+      @include mobile-only{
+        margin-top: -20px;;
+        max-width: 191px;
       }
     }
   }
@@ -249,6 +294,10 @@ body {
   float: left;
 }
 
+.float-right {
+  float: right;
+}
+
 .m-2 {
   margin: 2px;
 }
@@ -276,8 +325,8 @@ body {
   border: none;
   background-color: transparent;
   background-repeat: no-repeat;
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
   &:focus {
     outline: 0;
   }

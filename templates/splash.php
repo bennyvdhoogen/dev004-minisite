@@ -7,7 +7,9 @@
         <div class="row">
           <div class="centered-information">
             <div class="title-block">
-              <img src="assets/svg/cover_invert_1.svg" width="300px">
+              <a href="<?= $buttons['download']['url']?>" target="blank">
+                <img src="assets/svg/cover_invert_1.svg" width="300px">
+              </a>
             </div>
             <div class="continue-block">
               <button onclick="goToState(2);"> LISTEN </button>
