@@ -42,7 +42,7 @@
       <div id="track-info-text">
 
       </div>
-      <div id="actions" class="float-right hidden-xs">
+      <div id="actions" class="float-right">
         <button id="mute-btn" onclick="mutePlayer();" class="mute-btn mute-btn-unmuted"></button>
         <div id="mute-btn-muted" class="mute-btn mute-btn-muted hidden"></div>
       </div>
