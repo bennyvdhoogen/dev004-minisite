@@ -16,7 +16,7 @@ function detachIOEventListeners(){
 
 function checkIfMouseNearEdges(event){
   edges = {};
-  var edgeThickness = window.innerWidth * 0.15; // edge is 15% of screen width;
+  var edgeThickness = window.innerWidth * 0.20; // edge is 20% of screen width;
   edges.left = {x:{ start: 0, end: 0 + edgeThickness}};
   edges.left.x.size = edges.left.x.end - edges.left.x.start;
   edges.right = {x:{ start: window.innerWidth - edgeThickness, end: window.innerWidth}};
@@ -55,7 +55,7 @@ function onMouseMove( event ) {
 	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
 	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
   checkIfMouseNearEdges(event);
-    controls.rotUp(Math.sin(mouse.y /200) * -1);
+//    controls.rotUp(Math.sin(mouse.y /200) * -1);
 
     // exp
 

@@ -36,7 +36,7 @@ function render() {
 }
 
 function applyEdgeRotation(){
-  var speed = 0.01;
+  var speed = 0.018;
   switch(window.touchingEdge){
     case 'left':
       document.body.style.cursor = 'w-resize';
