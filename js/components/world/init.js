@@ -22,7 +22,6 @@ function init() {
   // Textures
   var textureLoader = new THREE.TextureLoader();
 
-
   var sphereTex = textureLoader.load( 'assets/img/dev004_sphere_bg.jpg' );
   var sphereMat = new THREE.MeshPhongMaterial( { color: 0xffffff, map: sphereTex } );
 
@@ -46,20 +45,28 @@ function init() {
   scene.add(sphere);
 
   // add the c4d ssets
-  //scene.add( dae );
+  scene.add( dae );
 
-  particleLight = new THREE.Mesh( new THREE.SphereGeometry( 4, 8, 8 ), new THREE.MeshBasicMaterial( { color: 0xffff00 } ) );
-  var directionalLight = new THREE.DirectionalLight(/*Math.random() * 0xffffff*/0xeeeaaa );
-  directionalLight.position.x = Math.random() - 0.5;
-  directionalLight.position.y = Math.random() - 0.5;
-  directionalLight.position.z = Math.random() - 0.5;
-  directionalLight.position.normalize();
-//  scene.add( directionalLight );
+  //var directionalLight = new THREE.DirectionalLight({color: 0xdddddd});
+  // directionalLight.position.x = 1;
+  // directionalLight.position.y = 1;
+  // directionalLight.position.z = 3
+  // directionalLight.shadowCameraVisible = true;
+  // directionalLight.target = new THREE.Object3D();
+  // directionalLight.target.position = new THREE.Vector3(1,1,1);
+  // scene.add( directionalLight );
+  // scene.add(directionalLight.target);
 
-  var pointLight = new THREE.PointLight( 0xffffff, 4 );
-//  particleLight.add( pointLight );
+  window.light = new THREE.PointLight( 0x334650, 5, 500);  //0xdddddd
+  window.light.position.set(1,1,1);
+  scene.add( light );
 
-  renderer = new THREE.WebGLRenderer({antialias: true});
+  var light2 = new THREE.PointLight( 0xdddddd, 1, 5000);  //0xdddddd
+  light2.position.set(1,3,1);
+  scene.add( light2);
+
+
+  renderer = new THREE.WebGLRenderer({antialias: false});
   renderer.setPixelRatio( window.devicePixelRatio );
   renderer.setSize( window.innerWidth, window.innerHeight );
   container.appendChild( renderer.domElement );

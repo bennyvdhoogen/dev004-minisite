@@ -27,10 +27,7 @@ function render() {
 	for ( var i = 0; i < intersects.length; i++ ) {
       // iterate through all intersecting objects
 	}
-  particleLight.position.x = Math.sin( timer * 4 ) * 3009;
-  particleLight.position.y = Math.cos( timer * 5 ) * 4000;
-  particleLight.position.z = Math.cos( timer * 4 ) * 3009;
-  THREE.AnimationHandler.update( clock.getDelta() );
+
   renderer.render( scene, camera );
 }
 
