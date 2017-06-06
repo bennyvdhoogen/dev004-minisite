@@ -64,6 +64,7 @@
     <script src="js/components/loaders/Detector.js"></script>
     <script src="js/components/StateManager.js"></script>
     <script src="js/components/SoundManager.js"></script>
+    <script src="js/components/EasingTools.js"></script>
     <script src="js/components/_main.js"></script>
     <!-- <script src="js/components/_debug.js"></script> -->
     <script src="js/components/world/init.js"></script>
