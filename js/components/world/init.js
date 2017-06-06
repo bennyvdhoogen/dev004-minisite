@@ -59,7 +59,7 @@ function init() {
   var pointLight = new THREE.PointLight( 0xffffff, 4 );
 //  particleLight.add( pointLight );
 
-  renderer = new THREE.WebGLRenderer();
+  renderer = new THREE.WebGLRenderer({antialias: true});
   renderer.setPixelRatio( window.devicePixelRatio );
   renderer.setSize( window.innerWidth, window.innerHeight );
   container.appendChild( renderer.domElement );
