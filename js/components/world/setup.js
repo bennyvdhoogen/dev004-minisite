@@ -30,6 +30,8 @@ window.addEventListener( 'deviceorientation', function(event){
 	 			var invisMaterial = new THREE.MeshNormalMaterial( ) ; //3
 	 			var invisMaterial = new THREE.MeshPhongMaterial( { color: 0xdddddd, shininess: 10, shading: THREE.SmoothShading, opacity: 0.5, transparent: true } );
 				var symbolMeshMaterial = new THREE.MeshLambertMaterial( { color: 0x0, emissive: 0x282828, shininess: 100, transparent: true, opacity: 1} );
+				var symbolMeshMaterial = new THREE.MeshPhongMaterial( { color: 0x334650, shininess: 100, specular:0x111111, emissive:0x0, shading: THREE.SmoothShaindg} );
+
 
 	 			dae.children.forEach(function(item){
 	 				if(item.name.indexOf('invis_') != -1){

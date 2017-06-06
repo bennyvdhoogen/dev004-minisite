@@ -61,7 +61,7 @@ function onMouseMove( event ) {
 
     raycaster.setFromCamera( mouse, camera );
 
-    var intersects = raycaster.intersectObjects( scene.children[1].children, true);
+    var intersects = raycaster.intersectObjects( scene.children[3].children, true);
     document.body.style.cursor = 'default';
 
     if ( intersects.length > 0 ) {
@@ -96,7 +96,7 @@ function onTouchStart(event){
 
   raycaster.setFromCamera( mouse, camera );
 
-  var intersects = raycaster.intersectObjects( scene.children[1].children, true);
+  var intersects = raycaster.intersectObjects( scene.children[3].children, true);
 
   if ( intersects.length > 0 ) {
 
@@ -117,7 +117,7 @@ function onDocumentMouseDown( event ) {
 
     raycaster.setFromCamera( mouse, camera );
 
-    var intersects = raycaster.intersectObjects( scene.children[1].children, true);
+    var intersects = raycaster.intersectObjects( scene.children[3].children, true);
 
     if ( intersects.length > 0 ) {
 
