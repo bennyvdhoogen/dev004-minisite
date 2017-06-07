@@ -45,6 +45,15 @@ function init() {
   sphere.position = new THREE.Vector3(0, 0, -299);
   scene.add(sphere);
 
+
+  window.light = new THREE.PointLight( 0x334650, 5, 500);  //0xdddddd
+  window.light.position.set(1,1,1);
+  scene.add( light );
+
+  var light2 = new THREE.PointLight( 0xdddddd, 1, 5000);  //0xdddddd
+  light2.position.set(1,3,1);
+  scene.add( light2);
+
   // add the c4d ssets
   //scene.add( dae );
 
@@ -59,7 +68,7 @@ function init() {
   var pointLight = new THREE.PointLight( 0xffffff, 4 );
 //  particleLight.add( pointLight );
 
-  renderer = new THREE.WebGLRenderer();
+  renderer = new THREE.WebGLRenderer({antialias: false});
   renderer.setPixelRatio( window.devicePixelRatio );
   renderer.setSize( window.innerWidth, window.innerHeight );
   container.appendChild( renderer.domElement );

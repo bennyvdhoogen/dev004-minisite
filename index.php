@@ -36,7 +36,7 @@
     <?php include 'templates/splash.php' ?>
     <?php include 'templates/loader.php' ?>
     <div class="information-button">
-      <button onclick="StateManager.setCurrentState(1);"> INFO </button>
+      <button onclick="goToState(1);"> INFO </button>
     </div>
     <div id="track-information" class="track-information">
       <div id="track-info-text">
@@ -64,6 +64,7 @@
     <script src="js/components/loaders/Detector.js"></script>
     <script src="js/components/StateManager.js"></script>
     <script src="js/components/SoundManager.js"></script>
+    <script src="js/components/EasingTools.js"></script>
     <script src="js/components/_main.js"></script>
     <!-- <script src="js/components/_debug.js"></script> -->
     <script src="js/components/world/init.js"></script>

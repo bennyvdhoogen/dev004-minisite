@@ -24,6 +24,35 @@ function toggleMobileExpand(){
   trackInfoElem.classList.toggle('expand-mobile');
 }
 
+document.addEventListener( 'mouseout' , mouseLeaves, false);
+
+function mouseLeaves() {
+  window.touchingEdge = 0;
+}
+
+function checkIfMouseNearEdges(event){
+  edges = {};
+  var edgeThickness = window.innerWidth * 0.20; // edge is 20% of screen width;
+  edges.left = {x:{ start: 0, end: 0 + edgeThickness}};
+  edges.left.x.size = edges.left.x.end - edges.left.x.start;
+  edges.right = {x:{ start: window.innerWidth - edgeThickness, end: window.innerWidth}};
+  edges.right.x.size = edges.right.x.end - edges.right.x.start;
+  window.touchingEdge = 0;
+  window.percentageInEdge = 0;
+
+  if(event.clientX > edges.left.x.start && event.clientX < edges.left.x.end){
+    window.touchingEdge = 'left';
+    var progress = (edges.left.x.end - event.clientX);
+    window.percentageInEdge  = progress / edges.left.x.size;
+  }
+
+  if(event.clientX > edges.right.x.start && event.clientX < edges.right.x.end){
+    window.touchingEdge = 'right';
+    var progress = (event.clientX - edges.right.x.start);
+    window.percentageInEdge  = progress / edges.right.x.size;
+  }
+}
+
 function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
@@ -40,13 +69,14 @@ function onMouseMove( event ) {
   $('.menu').removeClass("short");
 	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
 	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-    controls.rotUp(Math.sin(mouse.y /200) * -1);
+  checkIfMouseNearEdges(event);
+//    controls.rotUp(Math.sin(mouse.y /200) * -1);
 
     // exp
 
     raycaster.setFromCamera( mouse, camera );
 
-    var intersects = raycaster.intersectObjects( scene.children[1].children, true);
+    var intersects = raycaster.intersectObjects( scene.children[3].children, true);
     document.body.style.cursor = 'default';
 
     if ( intersects.length > 0 ) {
@@ -61,9 +91,6 @@ function onMouseMove( event ) {
         WiggleMeshOut(window.lastMesh);
       }
     }
-
-
-
 }
 
 function onTouchEnd(event){
@@ -92,8 +119,7 @@ function onTouchStart(event){
     //  console.log(intersects[0].object.parent)
     //  alert(mesh.name);
       SoundManager.playTrackByName(mesh.name);
-
-    }
+     }
   }else{
 		return false;
 	}
@@ -107,18 +133,17 @@ function onDocumentMouseDown( event ) {
 
     raycaster.setFromCamera( mouse, camera );
 
-    var intersects = raycaster.intersectObjects( scene.children[1].children, true);
+    var intersects = raycaster.intersectObjects( scene.children[3].children, true);
 
     if ( intersects.length > 0 ) {
-    //  alert(mesh.name);
 
       var mesh  = intersects[0].object.parent;
       console.log(mesh);
+
       if(mesh.name == 'Cylinder'){
         moveToDownloadPage();
       }
-    //  console.log(intersects[0].object.parent)
-    //  alert(mesh.name);
+
       SoundManager.playTrackByName(mesh.name);
 
     }

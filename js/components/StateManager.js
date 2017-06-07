@@ -52,6 +52,7 @@ var StateManager = (function () {
 			},
 			destroy: function(){
 				//
+				window.touchingEdge = 0;
 				detachIOEventListeners();
 			}
 		},
