@@ -14,8 +14,18 @@ function detachIOEventListeners(){
 	window.removeEventListener( 'mousewheel', onMouseWheel, false );
 }
 
+menuElem = document.getElementById('menu-elem');
+menuElem.addEventListener("touchstart", toggleMobileExpand, false);
+trackInfoElem = document.getElementById('track-information');
+trackInfoElem.addEventListener("touchstart", toggleMobileExpand, false);
+
+function toggleMobileExpand(){
+  menuElem.classList.toggle('expand-mobile');
+  trackInfoElem.classList.toggle('expand-mobile');
+}
+
 function onWindowResize() {
-  camera.aspect = window.innerWidth / window.innerHeight; 
+  camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize( window.innerWidth, window.innerHeight );
 }
@@ -65,29 +75,28 @@ function onTouchEnd(event){
 function onTouchStart(event){
   console.log(event);
   if(event.targetTouches){
+    mouse.x = +(event.targetTouches[0].pageX / window.innerWidth) * 2 +-1;
+    mouse.y = -(event.targetTouches[0].pageY / window.innerHeight) * 2 + 1;
 
-	}else{
+    raycaster.setFromCamera( mouse, camera );
+
+    var intersects = raycaster.intersectObjects( scene.children[1].children, true);
+
+    if ( intersects.length > 0 ) {
+    //  alert(mesh.name);
+
+      var mesh  = intersects[0].object.parent;
+      if(mesh.name == 'Cylinder'){
+        moveToDownloadPage();
+      }
+    //  console.log(intersects[0].object.parent)
+    //  alert(mesh.name);
+      SoundManager.playTrackByName(mesh.name);
+
+    }
+  }else{
 		return false;
 	}
-  mouse.x = +(event.targetTouches[0].pageX / window.innerWidth) * 2 +-1;
-  mouse.y = -(event.targetTouches[0].pageY / window.innerHeight) * 2 + 1;
-
-  raycaster.setFromCamera( mouse, camera );
-
-  var intersects = raycaster.intersectObjects( scene.children[1].children, true);
-
-  if ( intersects.length > 0 ) {
-  //  alert(mesh.name);
-
-    var mesh  = intersects[0].object.parent;
-    if(mesh.name == 'Cylinder'){
-      moveToDownloadPage();
-    }
-  //  console.log(intersects[0].object.parent)
-  //  alert(mesh.name);
-    SoundManager.playTrackByName(mesh.name);
-
-  }
 }
 
 function onDocumentMouseDown( event ) {

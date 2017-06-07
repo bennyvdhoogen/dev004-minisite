@@ -17,7 +17,7 @@
   <body>
     <header>
       <div class="menu-wrapper">
-        <div class="menu init float-left">
+        <div id="menu-elem" class="menu init float-left">
           <ul>
             <li><?= $info['release']; ?></li>
             <li><?= $info['artist']; ?></li>

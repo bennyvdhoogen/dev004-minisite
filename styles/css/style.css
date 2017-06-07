@@ -40,7 +40,7 @@ body {
       transform: rotate(-90deg); } }
 
 .track-information {
-  transition: height 0.3s ease;
+  transition: height 0.3s ease, top 0.3s ease, width 0.3s ease;
   height: 0px;
   position: absolute;
   z-index: 5;
@@ -54,6 +54,10 @@ body {
   left: 25px;
   background-color: black;
   border: none; }
+  @media (max-width: 480px) {
+    .track-information.expand-mobile {
+      width: 283px;
+      top: 88px; } }
   .track-information #actions {
     opacity: 0;
     margin-top: -17px; }
@@ -184,7 +188,7 @@ body {
 
 .menu {
   overflow: hidden;
-  transition: width 1s;
+  transition: width 0.3s, height 0.3s ease;
   z-index: 2;
   top: 25px;
   left: 25px;
@@ -193,12 +197,14 @@ body {
   border: 1px solid black;
   width: 198px;
   height: 31px; }
-  .menu:hover {
-    width: 575px;
-    height: 31px; }
-    @media (max-width: 480px) {
-      .menu:hover {
-        width: 198px; } }
+  @media only screen and (min-width: 321px) {
+    .menu:hover {
+      width: 575px;
+      height: 31px; } }
+  @media (max-width: 480px) {
+    .menu.expand-mobile {
+      width: 283px;
+      height: 63px; } }
   .menu ul {
     list-style: none;
     display: inline;
@@ -219,9 +225,10 @@ body {
       font-weight: 300;
       margin-left: -10px;
       border-right: 1px solid black;
-      padding-left: 15px;
-      /*  color: white;
-        background-color: #000; */ }
+      padding-left: 15px; }
+      @media (max-width: 480px) {
+        .menu li:nth-child(2) {
+          border-right: none; } }
   .menu a {
     color: #000; }
 

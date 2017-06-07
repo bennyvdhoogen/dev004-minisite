@@ -1,5 +1,6 @@
 @import 'mixins/mediaqueries';
 $menu-nav-width: 198px;
+$menu-nav-expand: 283px;
 
 html {
   overflow: hidden;
@@ -49,7 +50,7 @@ body {
 }
 
 .track-information{
-  transition: height 0.3s ease;
+  transition: height 0.3s ease, top 0.3s ease, width 0.3s ease;
   height: 0px;
   position: absolute;
   z-index: 5;
@@ -63,6 +64,14 @@ body {
   left: 25px;
   background-color: black;
   border: none;
+
+
+  &.expand-mobile{
+    @include mobile-only{
+        width: $menu-nav-expand;
+        top:88px;
+    }
+  }
 
   #actions{
     opacity: 0;
@@ -226,7 +235,7 @@ body {
 
 .menu {
   overflow: hidden;
-  transition: width 1s;
+  transition: width 0.3s, height 0.3s ease;
   z-index: 2;
   top: 25px;
   left: 25px;
@@ -236,11 +245,16 @@ body {
   width: $menu-nav-width;
   height: 31px;
   &:hover {
-    width: 575px;
-    height: 31px;
+    @include mobile-landscape-and-up {
+      width: 575px;
+      height: 31px;
+    }
+  }
 
+  &.expand-mobile{
     @include mobile-only{
-        width: $menu-nav-width;
+        width:  $menu-nav-expand;
+        height: 63px;
     }
   }
   ul {
@@ -263,8 +277,9 @@ body {
       margin-left: -10px;
       border-right: 1px solid black;
       padding-left: 15px;
-      /*  color: white;
-        background-color: #000; */
+      @include mobile-only{
+          border-right: none;
+      }
     }
     display: inline-block;
     list-style-type: none;
