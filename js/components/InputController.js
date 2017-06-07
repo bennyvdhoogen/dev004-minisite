@@ -107,7 +107,7 @@ function onTouchStart(event){
 
     raycaster.setFromCamera( mouse, camera );
 
-    var intersects = raycaster.intersectObjects( scene.children[1].children, true);
+    var intersects = raycaster.intersectObjects( scene.children[3].children, true);
 
     if ( intersects.length > 0 ) {
     //  alert(mesh.name);
