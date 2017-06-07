@@ -30,7 +30,7 @@ var SoundManager = (function () {
 
 	self.displayTrackName = function(){
 		var elemWrapper = document.getElementById("track-information");
-		elemWrapper.classList = 'track-information active';
+		elemWrapper.classList.toggle('active');
 		var elem = document.getElementById("track-info-text");
 		var trackTitle = self.songs[self.currentPlayingIndex].displayName;
 		elem.innerHTML = trackTitle;
@@ -42,7 +42,7 @@ var SoundManager = (function () {
 			console.log(sounds);
 			sounds.forEach(function(sound, index){
 				if(sound.title){
-					if(self.songs[index]){  
+					if(self.songs[index]){
 						self.songs[index].displayName = sound.title;
 					}
 				}

@@ -17,7 +17,7 @@
   <body>
     <header>
       <div class="menu-wrapper">
-        <div class="menu init float-left">
+        <div id="menu-elem" class="menu init float-left">
           <ul>
             <li><?= $info['release']; ?></li>
             <li><?= $info['artist']; ?></li>
@@ -42,7 +42,7 @@
       <div id="track-info-text">
 
       </div>
-      <div id="actions" class="float-right hidden-xs">
+      <div id="actions" class="float-right">
         <button id="mute-btn" onclick="mutePlayer();" class="mute-btn mute-btn-unmuted"></button>
         <div id="mute-btn-muted" class="mute-btn mute-btn-muted hidden"></div>
       </div>
