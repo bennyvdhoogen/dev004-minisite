@@ -14,6 +14,12 @@ function detachIOEventListeners(){
 	window.removeEventListener( 'mousewheel', onMouseWheel, false );
 }
 
+document.addEventListener( 'mouseout' , mouseLeaves, false);
+
+function mouseLeaves() {
+  window.touchingEdge = 0;
+}
+
 function checkIfMouseNearEdges(event){
   edges = {};
   var edgeThickness = window.innerWidth * 0.20; // edge is 20% of screen width;
