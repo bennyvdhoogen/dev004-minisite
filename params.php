@@ -19,8 +19,8 @@
 	];
 
 	$buttons = [
-		"download" => [ "txt" => "buy on bandcamp", "url" => "https://devorm.bandcamp.com"],
-		"redeem" => [ "txt" => "redeem download code", "url" => "https://devorm.bandcamp.com/yum"]
+		"download" => [ "txt" => "BUY ON BANDCAMP", "url" => "https://devorm.bandcamp.com"],
+		"redeem" => [ "txt" => "REDEEM DOWNLOAD CODE", "url" => "https://devorm.bandcamp.com/yum"]
 	];
 
 	$links =[

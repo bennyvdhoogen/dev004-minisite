@@ -9,13 +9,7 @@ body {
   margin: 0px;
   overflow: hidden; }
 
-#fetch-page {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center; }
-
-#splash-screen {
+#splash-screen, #fetch-page {
   z-index: 10;
   top: 0px;
   width: 100%;
@@ -82,14 +76,32 @@ body {
     font-weight: 300;
     border: 1px solid black; }
     .continue-block button:focus, .continue-block a:focus {
-      outline: none; }
+      outline: none;
+      text-decoration: none; }
     .continue-block button:hover, .continue-block a:hover {
       text-decoration: none;
       background-color: black;
       color: white; }
+  .continue-block.alt button, .continue-block.alt a {
+    text-decoration: none;
+    background-color: transparent;
+    width: 80%;
+    padding: 12px;
+    border: none;
+    color: rgba(0, 0, 0, 0.8);
+    margin: -15px 35px 35px 35px;
+    font-family: "Roboto";
+    font-weight: 300;
+    padding: 5px;
+    width: 40%;
+    border: none; }
+    .continue-block.alt button:focus, .continue-block.alt a:focus {
+      outline: none;
+      text-decoration: underline; }
+    .continue-block.alt button:hover, .continue-block.alt a:hover {
+      text-decoration: underline; }
 
 #fetch-page .title-block {
-  margin-top: 100px;
   display: flex;
   align-items: center;
   justify-content: center; }
