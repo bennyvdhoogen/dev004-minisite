@@ -1,7 +1,7 @@
 <div id="splash-screen" style="display:none;">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-sm-6 col-md-8 hidden-xs" style="height: 100vh; background-color: white; opacity: 0.5;">
+      <div class="col-sm-6 col-md-8 hidden-xs" onclick="goToState(2);" style="height: 100vh; background-color: white; opacity: 0.5;">
       </div>
       <div id="splash-information-panel" class="col-xs-12 col-md-4 col-sm-6" style="height:100vh; background-color: white;">
         <div class="row">

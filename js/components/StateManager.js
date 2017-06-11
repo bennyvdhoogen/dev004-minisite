@@ -16,7 +16,7 @@ var StateManager = (function () {
 					console.log('Loaded : 2 / 4');
 					window.animate();
 					console.log('Loaded : 3 / 4');
-					 window.scene.add( dae );
+					window.scene.add( dae );
 					console.log('Loaded : 4 / 4');
 					self.updateState({id: 1, ready: true});
 					self.setCurrentState(1);
@@ -53,6 +53,7 @@ var StateManager = (function () {
 			destroy: function(){
 				//
 				window.touchingEdge = 0;
+				document.body.style.cursor = 'default';
 				detachIOEventListeners();
 			}
 		},
