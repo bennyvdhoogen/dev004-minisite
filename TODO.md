@@ -16,6 +16,7 @@ Todo:
   - [x] Check out device orientational controls https://github.com/mrdoob/three.js/blob/master/examples/misc_controls_deviceorientation.html    
   - [x] See if the SoundCloud API can be used
   - [] Clean ups and presentation
+  - [] classList backward support
   - Splash page covering the canvas
 
 ---

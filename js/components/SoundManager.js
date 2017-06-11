@@ -30,7 +30,10 @@ var SoundManager = (function () {
 
 	self.displayTrackName = function(){
 		var elemWrapper = document.getElementById("track-information");
-		elemWrapper.classList.toggle('active');
+		if(!elemWrapper.classList.contains('active')){
+				elemWrapper.classList.toggle('active');
+		}
+
 		var elem = document.getElementById("track-info-text");
 		var trackTitle = self.songs[self.currentPlayingIndex].displayName;
 		elem.innerHTML = trackTitle;
