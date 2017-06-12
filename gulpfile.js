@@ -1,9 +1,9 @@
 var gulp = require('gulp');
 var concat = require('gulp-concat');
-var replace = require('gulp-replace');
+var uglify = require('gulp-uglify');
 
 var components = [
-  "./js/src/libs/three.min.js",
+  "./js/src/libs/three.js",
   "./js/src/components/controls/OrbitControls.js",
   "./js/src/components/controls/DeviceOrientationControls.js",
   "./js/src/components/controls/PointerLockControls.js",
@@ -21,12 +21,11 @@ var components = [
   "./js/src/components/world/render.js",
   "./js/src/components/InputController.js",
   "./js/src/components/NavigationController.js"
-  // './js/controlkit/controlKit.min.js'
 ]
 
 gulp.task('build', function() {
   return gulp.src(components)
     .pipe(concat('app.js'))
-    .pipe(replace(/('|")use strict\1/g, ';'))
-    .pipe(gulp.dest('./js/dist/'));
+    .pipe(uglify()) 
+    .pipe(gulp.dest('js/dist/'));
 });
