@@ -53,25 +53,6 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
     <script src="https://connect.soundcloud.com/sdk/sdk-3.1.2.js"></script>
     <script src="https://w.soundcloud.com/player/api.js"></script>
-    <script src="js/libs/three.min.js"></script>
-    <script src="js/components/controls/OrbitControls.js"></script>
-    <script src="js/components/controls/DeviceOrientationControls.js"></script>
-    <script src="js/components/controls/PointerLockControls.js"></script>
-    <script src="js/components/loaders/collada/Animation.js"></script>
-    <script src="js/components/loaders/collada/AnimationHandler.js"></script>
-    <script src="js/components/loaders/collada/KeyFrameAnimation.js"></script>
-    <script src="js/components/loaders/ColladaLoader.js"></script>
-    <script src="js/components/loaders/Detector.js"></script>
-    <script src="js/components/StateManager.js"></script>
-    <script src="js/components/SoundManager.js"></script>
-    <script src="js/components/EasingTools.js"></script>
-    <script src="js/components/_main.js"></script>
-    <!-- <script src="js/components/_debug.js"></script> -->
-    <script src="js/components/world/init.js"></script>
-    <script src="js/components/world/setup.js"></script>
-    <script src="js/components/world/render.js"></script>
-    <script src="js/components/InputController.js"></script>
-    <script src="js/components/NavigationController.js"></script>
-    <script type='text/javascript' src='js/controlkit/controlKit.min.js'></script>
+    <script src="js/dist/app.js"></script>
   </body>
 </html>

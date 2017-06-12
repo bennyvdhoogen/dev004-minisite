@@ -134,7 +134,7 @@ body {
         text-decoration: underline;
       }
       &:hover{
-        text-decoration: underline; 
+        text-decoration: underline;
       }
     }
   }
@@ -404,4 +404,36 @@ body {
   /* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
   filter: progid:DXImageTransform.Microsoft.Shadow(Strength=38, Direction=135, Color=#000000);
   /*IE 5.5-7*/
+}
+
+/** animations **/
+
+@keyframes flickerAnimation {
+  0%   { opacity:1; }
+  50%  { opacity:0; }
+  100% { opacity:1; }
+}
+@-o-keyframes flickerAnimation{
+  0%   { opacity:1; }
+  50%  { opacity:0; }
+  100% { opacity:1; }
+}
+@-moz-keyframes flickerAnimation{
+  0%   { opacity:1; }
+  50%  { opacity:0; }
+  100% { opacity:1; }
+}
+@-webkit-keyframes flickerAnimation{
+  0%   { opacity:1; }
+  50%  { opacity:0; }
+  100% { opacity:1; }
+}
+.animate-flicker {
+   -webkit-animation: flickerAnimation 1s infinite;
+   -webkit-animation-name: flickerAnimation;
+   -webkit-animation-duration: 1s;
+   -webkit-animation-iteration-count: infinite;
+   -moz-animation: flickerAnimation 1s infinite;
+   -o-animation: flickerAnimation 1s infinite;
+    animation: flickerAnimation 1s infinite;
 }

@@ -39,7 +39,11 @@ var StateManager = (function () {
 				self.drawSplash();
 			},
 			destroy: function(){
-				self.removeSplash();
+				console.log('destroy');
+				setTimeout(function(){
+					console.log('after timeout'); 
+						self.removeSplash();
+				}, 3000);
 			}
 		},
     {
