@@ -21,11 +21,15 @@ var components = [
   "./js/src/components/world/render.js",
   "./js/src/components/InputController.js",
   "./js/src/components/NavigationController.js"
-]
+] 
+
+gulp.task('watch-js', function(event){
+  gulp.watch('js/src/**/*.js', ['build']);
+});
 
 gulp.task('build', function() {
   return gulp.src(components)
     .pipe(concat('app.js'))
-    .pipe(uglify()) 
+    .pipe(uglify())
     .pipe(gulp.dest('js/dist/'));
 });

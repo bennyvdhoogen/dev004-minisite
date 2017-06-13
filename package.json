@@ -16,8 +16,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build-webpack": "webpack",
-    "dev": "webpack-dev-server"
+    "dev": "gulp watch-js"
   },
   "repository": {
     "type": "git",

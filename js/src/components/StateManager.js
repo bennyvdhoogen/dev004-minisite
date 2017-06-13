@@ -37,13 +37,9 @@ var StateManager = (function () {
 			init: function(){
 				getInitialRotationForObjects();
 				self.drawSplash();
-			},
+			}, 
 			destroy: function(){
-				console.log('destroy');
-				setTimeout(function(){
-					console.log('after timeout'); 
-						self.removeSplash();
-				}, 3000);
+				self.removeSplash();
 			}
 		},
     {
