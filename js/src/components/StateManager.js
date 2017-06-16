@@ -26,7 +26,9 @@ var StateManager = (function () {
 			destroy: function(){
 				//
 				var loaderScreen = document.getElementById('loader-screen');
-				loaderScreen.style.display = 'none';
+				setTimeout(function(){
+					loaderScreen.style.display = 'none'; 	
+				}, 1000);
 
 			}
 		},
@@ -37,7 +39,7 @@ var StateManager = (function () {
 			init: function(){
 				getInitialRotationForObjects();
 				self.drawSplash();
-			}, 
+			},
 			destroy: function(){
 				self.removeSplash();
 			}
