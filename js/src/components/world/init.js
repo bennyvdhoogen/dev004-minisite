@@ -1,4 +1,5 @@
 function init() {
+  window.shouldRender = true;
   container = document.createElement( 'div' );
   container.width = window.innerWidth;
   container.height = window.innerHeight;
