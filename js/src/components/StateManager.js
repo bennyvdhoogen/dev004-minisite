@@ -27,7 +27,7 @@ var StateManager = (function () {
 				//
 				var loaderScreen = document.getElementById('loader-screen');
 				setTimeout(function(){
-					loaderScreen.style.display = 'none'; 	
+					loaderScreen.style.display = 'none';
 				}, 1000);
 
 			}
@@ -50,6 +50,7 @@ var StateManager = (function () {
 			ready: false,
 			init: function(){
 				attachIOEventListeners();
+				SoundManager.playTrack(0);
 				//
 			},
 			destroy: function(){

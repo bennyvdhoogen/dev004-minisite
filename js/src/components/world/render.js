@@ -78,7 +78,6 @@ function WiggleMeshIn(mesh){
   //  animateMethod(meshName,'rotateY',0, 0, 0.005, 200, 'in');
     animateScale(meshName, 0, 1, 1.25, 250, 'in');
   }
-  console.log(mesh);
 }
 
 function animateRotation(meshName,unit,from,to,time, status) {
@@ -91,7 +90,6 @@ function animateRotation(meshName,unit,from,to,time, status) {
             if( step == 1){ clearInterval(timer); elem.isAnimating = status;}
         },25);
     elem.isAnimating = status;
-    console.log(elem.isAnimating);
     elem['rotation']['x'] = from+unit;
 }
 
