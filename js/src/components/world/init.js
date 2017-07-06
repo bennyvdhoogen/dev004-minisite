@@ -35,7 +35,7 @@ function init() {
 				pitchMod: { type: "f", value: 1 }
       },
       vertexShader: vertexShader,
-      fragmentShader: fragmentShader
+      fragmentShader: fragmentShader 
 
     } );
 		window.perlinMaterial = perlinMaterial;
