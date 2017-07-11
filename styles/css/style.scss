@@ -161,11 +161,16 @@ body {
 }
 
 #splash-information-panel{
-  box-shadow: -3px 6px 5px 0px rgba(0, 0, 0, 0.1);
+//  box-shadow: -3px 6px 5px 0px rgba(0, 0, 0, 0.1);
+  border-left: 1px solid black;
   height:100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @include tablet-portrait-and-below {
+    border: none;
+  }
 
   .loader{
     font-family: 'Roboto', sans-serif;
