@@ -9,16 +9,16 @@ var SoundManager = (function () {
 
 	// maps the name of the meshes, the soundcloud widget track index and the track display title together.
   self.songs = [
-       {"name": "money", "displayName" : "Money", "index": 0},
-       {"name": "arab", "displayName" : "Arab", "index": 1},
-       {"name": "sphlash", "displayName" : "Sphlash", "index": 2},
-       {"name": "smile", "displayName" : "Smile", "index": 3},
-       {"name": "slime", "displayName" : "Slime", "index": 4},
-       {"name": "hand", "displayName" : "Hand", "index": 5}
+       {"name": "money", "displayName" : "Ghost Kwini - Mitosis", "index": 0},
+       {"name": "arab", "displayName" : "Ghost Kwini - Exit With No Return", "index": 1},
+       {"name": "sphlash", "displayName" : "Ghost Kwini - Meiosis", "index": 2},
+       {"name": "smile", "displayName" : "Ghost Kwini - Transmit", "index": 3},
+       {"name": "slime", "displayName" : "Ghost Kwini - Receive", "index": 4},
+       {"name": "hand", "displayName" : "Ghost Kwini - Encounter Of Pasts", "index": 5}
   ];
 
   self.playTrackByName = function(songName){
-    var songName = songName.replace("invis_", "");
+    var songName = songName.replace("invis_", ""); 
     var songIndex = undefined;
     self.songs.forEach(function(item, key){
         if(item.name == songName){
@@ -39,8 +39,7 @@ var SoundManager = (function () {
 		elem.innerHTML = trackTitle;
 	}
 
-  self.attachSCPlayer = function(){
-    self.soundcloudPlayer = window.SC.Widget('soundcloud-player');
+	self.updateTrackInfo = function(){
 		self.soundcloudPlayer.getSounds(function(sounds){
 			console.log(sounds);
 			sounds.forEach(function(sound, index){
@@ -51,11 +50,18 @@ var SoundManager = (function () {
 				}
 			});
 		});
+	}
+
+  self.attachSCPlayer = function(){
+    self.soundcloudPlayer = window.SC.Widget('soundcloud-player');
+		self.updateTrackInfo();
+
 		self.soundcloudPlayer.bind(SC.Widget.Events.PAUSE, function(event){
 			//
 		});
 		self.soundcloudPlayer.bind(SC.Widget.Events.PLAY, function(event){
-			//
+			self.updateTrackInfo();
+			console.log(event);
 		});
 		self.soundcloudPlayer.bind(SC.Widget.Events.FINISH, function(event){
 			// stop playback on track finish

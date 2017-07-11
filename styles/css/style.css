@@ -39,7 +39,7 @@ body {
   position: absolute;
   z-index: 5;
   overflow: hidden;
-  width: 198px;
+  width: 215px;
   font-size: 12px;
   font-weight: 200;
   top: 56px;
@@ -54,7 +54,7 @@ body {
       top: 88px; } }
   .track-information #actions {
     opacity: 0;
-    margin-top: -17px; }
+    margin-top: -15px; }
   .track-information.active {
     height: 23px; }
     .track-information.active #actions {
@@ -207,7 +207,7 @@ body {
   color: black;
   background-color: white;
   border: 1px solid black;
-  width: 198px;
+  width: 215px;
   height: 31px; }
   @media only screen and (min-width: 321px) {
     .menu:hover {
@@ -282,8 +282,8 @@ body {
   border: none;
   background-color: transparent;
   background-repeat: no-repeat;
-  width: 20px;
-  height: 20px; }
+  width: 18px;
+  height: 18px; }
   .mute-btn:focus {
     outline: 0; }
 
