@@ -75,6 +75,8 @@ function onWindowResize() {
 }
 
 function onMouseWheel(event){
+  ScrollingController.runScrollingTypeCheck(); 
+
   if(ScrollingController.applySmoothScrolling){
     ScrollingController.handleEvent(event);
   }else{

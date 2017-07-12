@@ -51244,7 +51244,7 @@ var ScrollingController = (function () {
 	self.scrollingRightSpeed = 0;
 	self.scrollingProgress = 0; // float bewteen 0 <-> 1
 
-  self.scrollingIncrement = 0.01;
+  self.scrollingIncrement = 0.02;
   self.dampingFactor = self.scrollingIncrement * 1;
   self.scrollingStartSpeed = 0.01;
   self.scrollingCap = 0.01;
@@ -51255,14 +51255,66 @@ var ScrollingController = (function () {
   self.isScrolling = false;
   self.isStopping = false;
 
-	self.scrollingCooldown = 200; // period (in ms) AFTER scroll when  wheel events will be ignored
+	self.scrollingCooldown = 75; // period (in ms) AFTER scroll when  wheel events will be ignored
 	self.scrollingCooldownStart; // timestamp when cooldown started
 	self.scrollingThreshold = 155;
 
+	self.scrollingTypeCheck = {
+		status: 0,
+		startTime : 0,
+		endTime : 0,
+		duration: 1000,
+		eventTimestamps: [],
+		numEvents: 0,
+		checkResults: []
+	};
+
+	self.runScrollingTypeCheck = function(){
+		var currentTime = new Date().getTime();
+		function init(status){
+			self.scrollingTypeCheck.status = status;
+			self.scrollingTypeCheck.startTime = currentTime;
+			self.scrollingTypeCheck.endTime = self.scrollingTypeCheck.startTime + self.scrollingTypeCheck.duration;
+			self.scrollingTypeCheck.numEvents = 0;
+			self.scrollingTypeCheck.eventTimestamps = [];
+		}
+
+		if(self.scrollingTypeCheck.status == 0){
+			init(1);
+		}
+
+		// on running
+		if(self.scrollingTypeCheck.status == 1){
+			console.log(self.scrollingTypeCheck);
+			self.scrollingTypeCheck.numEvents++;
+			self.scrollingTypeCheck.eventTimestamps.push(currentTime);
+		}
+
+		// on end
+		if(self.scrollingTypeCheck.status == 1 && currentTime > self.scrollingTypeCheck.endTime){
+			var result = self.scrollingTypeCheck.eventTimestamps.reduce(function(acc, element, index, array) {
+					acc.sum = array[index -1];
+					acc.sum = element - acc.sum;
+					console.log(acc);
+					acc.timeDeltas.push(acc.sum );
+
+			    return acc;
+			}, {timeDeltas:[], sum: self.scrollingTypeCheck.eventTimestamps[0]});
+
+			self.scrollingTypeCheck.checkResults.push({timestamp: self.scrollingTypeCheck.startTime, count: self.scrollingTypeCheck.numEvents});
+			init(0);
+		}
+	}
   // on scroll up/down event:
   // 1) scroll left speed increases (if event.deltaY < 0)
 	// 1) scroll right speed increases (if event.deltaY > 0)
   // every frame the scroll speed decreases so that after {{scrollDuration}} the speed is 0
+
+
+	self.determineScrollType = function(event){
+		self.scrollingTypeCheck.startTime = new Date().getTime();
+		self.scrollingTypeCheck.endTime = self.scrollingTypeCheck.startTime + self.scrollingTypeCheck.duration;
+	}
 
   self.determineTargetDirection = function(event){
     if(event.deltaY < 0){
@@ -51369,7 +51421,7 @@ var ScrollingController = (function () {
 	      window.controls.rotate(self.scrollingCurrentSpeed);
 	      self.updateSpeed();
 				self.updateProgress();
- 
+
 				// console.log("isScrolling : "+ self.isScrolling);
 				// console.log("scrollStart : "+ self.scrollStartTime);
 				// console.log("scrollTimeLeft :" + self.scrollTimeLeft);
@@ -51808,6 +51860,8 @@ function onWindowResize() {
 }
 
 function onMouseWheel(event){
+  ScrollingController.runScrollingTypeCheck(); 
+
   if(ScrollingController.applySmoothScrolling){
     ScrollingController.handleEvent(event);
   }else{
