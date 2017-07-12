@@ -51244,10 +51244,10 @@ var ScrollingController = (function () {
 	self.scrollingRightSpeed = 0;
 	self.scrollingProgress = 0; // float bewteen 0 <-> 1
 
-  self.scrollingIncrement = 0.02;
+  self.scrollingIncrement = 0.03;
   self.dampingFactor = self.scrollingIncrement * 1;
   self.scrollingStartSpeed = 0.01;
-  self.scrollingCap = 0.01;
+  self.scrollingCap = 0.02; 
   self.scrollDuration = 100; //in ms
   self.scrollStartTime = {};
 	self.scrollTimeLeft = 0;
@@ -51255,7 +51255,7 @@ var ScrollingController = (function () {
   self.isScrolling = false;
   self.isStopping = false;
 
-	self.scrollingCooldown = 75; // period (in ms) AFTER scroll when  wheel events will be ignored
+	self.scrollingCooldown = 25; // period (in ms) AFTER scroll when  wheel events will be ignored
 	self.scrollingCooldownStart; // timestamp when cooldown started
 	self.scrollingThreshold = 155;
 
@@ -51270,12 +51270,12 @@ var ScrollingController = (function () {
 		checkResults: []
 	};
 
-	self.determinedScrollingMechanism = 'stepper'; // default stepping
+	self.determinedScrollingMechanism = 'continous'; // default stepping
 
 	self.scrollingMechanismReads = {
 		data: {},
 		minPercentage: 0.6,
-		minReads: 10,
+		minReads: 15,
 		countMemory: 50,
 		init: function(){
 			standard = {
@@ -51302,7 +51302,7 @@ var ScrollingController = (function () {
 		if(self.scrollingMechanismReads){
 			if(self.scrollingMechanismReads.data && self.scrollingMechanismReads.data.history){
 				for(key in self.scrollingMechanismReads.data.history){
-					if(self.scrollingMechanismReads.data.history[key].count > self.scrollingMechanismReads.minReads){ 
+					if(self.scrollingMechanismReads.data.history[key].count > self.scrollingMechanismReads.minReads){
 						if(self.scrollingMechanismReads.data.history[key].percentage > self.scrollingMechanismReads.minPercentage){
 							self.determinedScrollingMechanism = key;
 						}
