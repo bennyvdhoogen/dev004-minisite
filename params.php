@@ -1,7 +1,7 @@
 <?php
 
 	$meta = [
-		"title" => "ghost kwini - void, seperation and waiting",
+		"title" => "ghost kwini - void, separation and waiting",
 		"description" => "A loveplay starring cells | DEV004",
 		"image" => "http://www.d-e-v-o-r-m.com/004/assets/meta/image.jpg",
 		"url" => "http://www.d-e-v-o-r-m.com/004"
