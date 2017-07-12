@@ -26,11 +26,92 @@ var ScrollingController = (function () {
 		status: 0,
 		startTime : 0,
 		endTime : 0,
-		duration: 1000,
+		duration: 200,
 		eventTimestamps: [],
 		numEvents: 0,
+		maxResults: 50,
 		checkResults: []
 	};
+
+	self.determinedScrollingMechanism = 'stepper'; // default stepping
+
+	self.scrollingMechanismReads = {
+		data: {},
+		minPercentage: 0.6,
+		minReads: 10,
+		countMemory: 50,
+		init: function(){
+			standard = {
+				total: 0,
+				history: {
+					"stepper": {
+						count: 0,
+						percentage: 0
+					},
+					"continous": {
+						count: 0,
+						percentage: 0
+					}
+				}
+			}
+			return standard;
+		}
+	};
+
+	self.scrollingMechanismReads.data = self.scrollingMechanismReads.init();
+
+	self.determineScrollType = function(){
+		self.scrollingMechanismReads;
+		if(self.scrollingMechanismReads){
+			if(self.scrollingMechanismReads.data && self.scrollingMechanismReads.data.history){
+				for(key in self.scrollingMechanismReads.data.history){
+					if(self.scrollingMechanismReads.data.history[key].count > self.scrollingMechanismReads.minReads){ 
+						if(self.scrollingMechanismReads.data.history[key].percentage > self.scrollingMechanismReads.minPercentage){
+							self.determinedScrollingMechanism = key;
+						}
+					}
+				}
+			}
+		}
+
+		switch(self.determinedScrollingMechanism){
+			case 'continous':
+				self.applySmoothScrolling = false;
+				break;
+			case 'stepper':
+				self.applySmoothScrolling = true;
+				break;
+		}
+	}
+
+	self.readScrollingType = function(){
+		if(self.scrollingTypeCheck.checkResults){
+			var arrLength = self.scrollingTypeCheck.checkResults.length;
+			var targetResult = self.scrollingTypeCheck.checkResults[arrLength - 1];
+		}
+
+		if(targetResult){
+
+				if(targetResult.timeDeltaAvg < 20){
+					self.scrollingMechanismReads.data.total++;
+					var determinedMechanism = 'continous';
+				}
+
+				if(targetResult.timeDeltaAvg > 20){
+					self.scrollingMechanismReads.data.total++;
+					var determinedMechanism = 'stepper';
+				}
+
+				self.determinedScrollingMechanism = determinedMechanism
+				self.scrollingMechanismReads.data.history[determinedMechanism].count++;
+				self.scrollingMechanismReads.data.history[determinedMechanism].percentage = self.scrollingMechanismReads.data.history[determinedMechanism].count / self.scrollingMechanismReads.data.total;
+				self.applySmoothScrolling = false;
+		}
+
+		if(self.scrollingMechanismReads.data.total > self.scrollingMechanismReads.countMemory){
+			self.scrollingMechanismReads.data = self.scrollingMechanismReads.init();
+		}
+	}
 
 	self.runScrollingTypeCheck = function(){
 		var currentTime = new Date().getTime();
@@ -48,36 +129,50 @@ var ScrollingController = (function () {
 
 		// on running
 		if(self.scrollingTypeCheck.status == 1){
-			console.log(self.scrollingTypeCheck);
 			self.scrollingTypeCheck.numEvents++;
 			self.scrollingTypeCheck.eventTimestamps.push(currentTime);
 		}
 
 		// on end
 		if(self.scrollingTypeCheck.status == 1 && currentTime > self.scrollingTypeCheck.endTime){
-			var result = self.scrollingTypeCheck.eventTimestamps.reduce(function(acc, element, index, array) {
-					acc.sum = array[index -1];
-					acc.sum = element - acc.sum;
-					console.log(acc);
-					acc.timeDeltas.push(acc.sum );
+			var avg = self.scrollingTypeCheck.eventTimestamps.reduce(function(acc, element, index, array) {
+					acc.current = array[index -1];
+					acc.current = element - acc.current;
+
+					if(!acc.current.isNan){
+						acc.timeDeltas.push(acc.current);
+					}
+					var sum = 0;
+					for(i = 0 ; i < acc.timeDeltas.length; i++){
+						if(!isNaN(acc.timeDeltas[i]) ){
+							sum = sum + acc.timeDeltas[i];
+						}
+					}
+
+					var avg = sum / array.length;
+					if(index == array.length -1){
+						return avg;
+					}
 
 			    return acc;
-			}, {timeDeltas:[], sum: self.scrollingTypeCheck.eventTimestamps[0]});
+			}, {timeDeltas:[], current: self.scrollingTypeCheck.eventTimestamps[0]});
 
-			self.scrollingTypeCheck.checkResults.push({timestamp: self.scrollingTypeCheck.startTime, count: self.scrollingTypeCheck.numEvents});
+			self.scrollingTypeCheck.checkResults.push({timestamp: self.scrollingTypeCheck.startTime, count: self.scrollingTypeCheck.numEvents, timeDeltaAvg: avg});
+			if(self.scrollingTypeCheck.checkResults.length > self.scrollingTypeCheck.maxResults){
+				self.scrollingTypeCheck.checkResults = [];
+			}
+
 			init(0);
 		}
+
+		self.readScrollingType();
+		self.determineScrollType();
 	}
   // on scroll up/down event:
   // 1) scroll left speed increases (if event.deltaY < 0)
 	// 1) scroll right speed increases (if event.deltaY > 0)
   // every frame the scroll speed decreases so that after {{scrollDuration}} the speed is 0
 
-
-	self.determineScrollType = function(event){
-		self.scrollingTypeCheck.startTime = new Date().getTime();
-		self.scrollingTypeCheck.endTime = self.scrollingTypeCheck.startTime + self.scrollingTypeCheck.duration;
-	}
 
   self.determineTargetDirection = function(event){
     if(event.deltaY < 0){
@@ -115,19 +210,13 @@ var ScrollingController = (function () {
 
 
 		if(currentTime < (self.scrollingCooldownStart + self.scrollingCooldown)){
-			console.log("still warm!");
-			console.log(event);
 			self.scrollingCooldownStart = currentTime;
 			if(wheelDelta < self.scrollingThreshold){
 				return false;
 			}
-			console.log(wheelDelta);
 			//return false;
 		}
 
-		console.log("currentTime :" + currentTime);
-		console.log("scrollingCooldownStart :" + self.scrollingCooldownStart);
-		console.log("scrollingCooldown :" + self.scrollignCooldown);
 
     self.determineTargetDirection(event);
 
@@ -184,14 +273,6 @@ var ScrollingController = (function () {
 	      window.controls.rotate(self.scrollingCurrentSpeed);
 	      self.updateSpeed();
 				self.updateProgress();
-
-				// console.log("isScrolling : "+ self.isScrolling);
-				// console.log("scrollStart : "+ self.scrollStartTime);
-				// console.log("scrollTimeLeft :" + self.scrollTimeLeft);
-				// console.log("progress :" + self.scrollingProgress);
-				// console.log("scrollEnd : "+ (self.scrollEndTime));
-				// console.log("left : " + self.scrollingLeftSpeed * 1);
-				// console.log("right : " + self.scrollingRightSpeed * 1);
 			}
   }
 
