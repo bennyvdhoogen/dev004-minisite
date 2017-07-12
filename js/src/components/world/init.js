@@ -1,4 +1,5 @@
 function init() {
+  window.shouldRender = true;
   container = document.createElement( 'div' );
   container.width = window.innerWidth;
   container.height = window.innerHeight;
@@ -34,7 +35,7 @@ function init() {
 				pitchMod: { type: "f", value: 1 }
       },
       vertexShader: vertexShader,
-      fragmentShader: fragmentShader
+      fragmentShader: fragmentShader 
 
     } );
 		window.perlinMaterial = perlinMaterial;

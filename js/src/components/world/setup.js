@@ -47,7 +47,7 @@ window.addEventListener( 'deviceorientation', function(event){
 								mesh.material = symbolMeshMaterial;
 								if(mesh.children[0]){
 									var innerMesh = mesh.children[0];
-									innerMesh.children.forEach(function(item){
+									innerMesh.children.forEach(function(item){ 
 											initialObjectRotations[item.name] = item.rotation;
 									});
 									innerMesh.material = symbolMeshMaterial;
