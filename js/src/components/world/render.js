@@ -24,6 +24,7 @@ function render() {
 	// calculate objects intersecting the picking ray
 	var intersects = raycaster.intersectObjects( scene.children );
   applyEdgeRotation();
+  ScrollingController.applyScrollRotation(); 
 
 	for ( var i = 0; i < intersects.length; i++ ) {
       // iterate through all intersecting objects
@@ -32,7 +33,9 @@ function render() {
   particleLight.position.y = Math.cos( timer * 5 ) * 4000;
   particleLight.position.z = Math.cos( timer * 4 ) * 3009;
   THREE.AnimationHandler.update( clock.getDelta() );
-  renderer.render( scene, camera );
+  if(window.shouldRender){
+    renderer.render( scene, camera );
+  }
 }
 
 function applyEdgeRotation(){

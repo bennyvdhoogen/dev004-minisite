@@ -24,10 +24,25 @@ function toggleMobileExpand(){
   trackInfoElem.classList.toggle('expand-mobile');
 }
 
+document.addEventListener( 'mouseover' , mouseEnters, false);
 document.addEventListener( 'mouseout' , mouseLeaves, false);
+document.addEventListener( "visibilitychange" , windowActiveToggle, false);
+
+
+function mouseEnters(){
+  window.shouldRender = true;
+}
 
 function mouseLeaves() {
   window.touchingEdge = 0;
+}
+
+function windowActiveToggle(){
+  if(document.hidden){
+    window.shouldRender = false;
+  }else{
+    window.shouldRender = true;
+  }
 }
 
 function checkIfMouseNearEdges(event){
@@ -60,7 +75,13 @@ function onWindowResize() {
 }
 
 function onMouseWheel(event){
-	controls.rotate(0.001 * event.deltaY);
+  ScrollingController.runScrollingTypeCheck(); 
+
+  if(ScrollingController.applySmoothScrolling){
+    ScrollingController.handleEvent(event);
+  }else{
+    controls.rotate(0.001 * event.deltaY);
+  }
 }
 
 function onMouseMove( event ) {
