@@ -1,6 +1,7 @@
 var ScrollingController = (function () {
 	var self = {};
   // idle, playing, muted
+	self.applySmoothScrolling = false;
   self.scrollingCurrentSpeed = 0;
 	self.scrollingLeftSpeed = 0;
 	self.scrollingRightSpeed = 0;
@@ -126,20 +127,20 @@ var ScrollingController = (function () {
   }
 
   self.applyScrollRotation = function(){
-    	self.updateTimeElapsed();
-      window.controls.rotate(self.scrollingCurrentSpeed);
-
-      self.updateSpeed();
-			self.updateProgress();
-  //    self.applyDamping();
-
-			console.log("isScrolling : "+ self.isScrolling);
-			console.log("scrollStart : "+ self.scrollStartTime);
-			console.log("scrollTimeLeft :" + self.scrollTimeLeft);
-			console.log("progress :" + self.scrollingProgress);
-			console.log("scrollEnd : "+ (self.scrollEndTime));
-			console.log("left : " + self.scrollingLeftSpeed * 1);
-			console.log("right : " + self.scrollingRightSpeed * 1);
+			if(self.applySmoothScrolling){
+	    	self.updateTimeElapsed();
+	      window.controls.rotate(self.scrollingCurrentSpeed);
+	      self.updateSpeed();
+				self.updateProgress();
+ 
+				// console.log("isScrolling : "+ self.isScrolling);
+				// console.log("scrollStart : "+ self.scrollStartTime);
+				// console.log("scrollTimeLeft :" + self.scrollTimeLeft);
+				// console.log("progress :" + self.scrollingProgress);
+				// console.log("scrollEnd : "+ (self.scrollEndTime));
+				// console.log("left : " + self.scrollingLeftSpeed * 1);
+				// console.log("right : " + self.scrollingRightSpeed * 1);
+			}
   }
 
 	return self;

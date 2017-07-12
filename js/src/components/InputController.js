@@ -75,8 +75,11 @@ function onWindowResize() {
 }
 
 function onMouseWheel(event){
-	//controls.rotate(0.001 * event.deltaY);
-  ScrollingController.handleEvent(event);
+  if(ScrollingController.applySmoothScrolling){
+    ScrollingController.handleEvent(event);
+  }else{
+    controls.rotate(0.001 * event.deltaY);
+  }
 }
 
 function onMouseMove( event ) {
